@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		E38C6DBD2DE0D9CD000B5D5A /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = E38C6DBC2DE0D9CD000B5D5A /* Alamofire */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		E38C6D982DE0C41E000B5D5A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E38C6DBD2DE0D9CD000B5D5A /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +117,7 @@
 			);
 			name = unisplashClone;
 			packageProductDependencies = (
+				E38C6DBC2DE0D9CD000B5D5A /* Alamofire */,
 			);
 			productName = unisplashClone;
 			productReference = E38C6D8A2DE0C41D000B5D5A /* unisplashClone.app */;
@@ -195,6 +201,9 @@
 			);
 			mainGroup = E38C6D812DE0C41D000B5D5A;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				E38C6DBB2DE0D9CD000B5D5A /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = E38C6D8B2DE0C41D000B5D5A /* Products */;
 			projectDirPath = "";
@@ -560,6 +569,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E38C6DBB2DE0D9CD000B5D5A /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.10.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E38C6DBC2DE0D9CD000B5D5A /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E38C6DBB2DE0D9CD000B5D5A /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E38C6D822DE0C41D000B5D5A /* Project object */;
 }
