@@ -1,0 +1,565 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXContainerItemProxy section */
+		E38C6D982DE0C41E000B5D5A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E38C6D822DE0C41D000B5D5A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E38C6D892DE0C41D000B5D5A;
+			remoteInfo = unisplashClone;
+		};
+		E38C6DA22DE0C41E000B5D5A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E38C6D822DE0C41D000B5D5A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E38C6D892DE0C41D000B5D5A;
+			remoteInfo = unisplashClone;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		E38C6D8A2DE0C41D000B5D5A /* unisplashClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = unisplashClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E38C6D972DE0C41E000B5D5A /* unisplashCloneTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = unisplashCloneTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E38C6DA12DE0C41E000B5D5A /* unisplashCloneUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = unisplashCloneUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		E38C6D8C2DE0C41D000B5D5A /* unisplashClone */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = unisplashClone;
+			sourceTree = "<group>";
+		};
+		E38C6D9A2DE0C41E000B5D5A /* unisplashCloneTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = unisplashCloneTests;
+			sourceTree = "<group>";
+		};
+		E38C6DA42DE0C41E000B5D5A /* unisplashCloneUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = unisplashCloneUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E38C6D872DE0C41D000B5D5A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E38C6D942DE0C41E000B5D5A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E38C6D9E2DE0C41E000B5D5A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E38C6D812DE0C41D000B5D5A = {
+			isa = PBXGroup;
+			children = (
+				E38C6D8C2DE0C41D000B5D5A /* unisplashClone */,
+				E38C6D9A2DE0C41E000B5D5A /* unisplashCloneTests */,
+				E38C6DA42DE0C41E000B5D5A /* unisplashCloneUITests */,
+				E38C6D8B2DE0C41D000B5D5A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E38C6D8B2DE0C41D000B5D5A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E38C6D8A2DE0C41D000B5D5A /* unisplashClone.app */,
+				E38C6D972DE0C41E000B5D5A /* unisplashCloneTests.xctest */,
+				E38C6DA12DE0C41E000B5D5A /* unisplashCloneUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E38C6D892DE0C41D000B5D5A /* unisplashClone */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E38C6DAB2DE0C41F000B5D5A /* Build configuration list for PBXNativeTarget "unisplashClone" */;
+			buildPhases = (
+				E38C6D862DE0C41D000B5D5A /* Sources */,
+				E38C6D872DE0C41D000B5D5A /* Frameworks */,
+				E38C6D882DE0C41D000B5D5A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				E38C6D8C2DE0C41D000B5D5A /* unisplashClone */,
+			);
+			name = unisplashClone;
+			packageProductDependencies = (
+			);
+			productName = unisplashClone;
+			productReference = E38C6D8A2DE0C41D000B5D5A /* unisplashClone.app */;
+			productType = "com.apple.product-type.application";
+		};
+		E38C6D962DE0C41E000B5D5A /* unisplashCloneTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E38C6DAE2DE0C41F000B5D5A /* Build configuration list for PBXNativeTarget "unisplashCloneTests" */;
+			buildPhases = (
+				E38C6D932DE0C41E000B5D5A /* Sources */,
+				E38C6D942DE0C41E000B5D5A /* Frameworks */,
+				E38C6D952DE0C41E000B5D5A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E38C6D992DE0C41E000B5D5A /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				E38C6D9A2DE0C41E000B5D5A /* unisplashCloneTests */,
+			);
+			name = unisplashCloneTests;
+			packageProductDependencies = (
+			);
+			productName = unisplashCloneTests;
+			productReference = E38C6D972DE0C41E000B5D5A /* unisplashCloneTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		E38C6DA02DE0C41E000B5D5A /* unisplashCloneUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E38C6DB12DE0C41F000B5D5A /* Build configuration list for PBXNativeTarget "unisplashCloneUITests" */;
+			buildPhases = (
+				E38C6D9D2DE0C41E000B5D5A /* Sources */,
+				E38C6D9E2DE0C41E000B5D5A /* Frameworks */,
+				E38C6D9F2DE0C41E000B5D5A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E38C6DA32DE0C41E000B5D5A /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				E38C6DA42DE0C41E000B5D5A /* unisplashCloneUITests */,
+			);
+			name = unisplashCloneUITests;
+			packageProductDependencies = (
+			);
+			productName = unisplashCloneUITests;
+			productReference = E38C6DA12DE0C41E000B5D5A /* unisplashCloneUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E38C6D822DE0C41D000B5D5A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1630;
+				LastUpgradeCheck = 1630;
+				TargetAttributes = {
+					E38C6D892DE0C41D000B5D5A = {
+						CreatedOnToolsVersion = 16.3;
+					};
+					E38C6D962DE0C41E000B5D5A = {
+						CreatedOnToolsVersion = 16.3;
+						TestTargetID = E38C6D892DE0C41D000B5D5A;
+					};
+					E38C6DA02DE0C41E000B5D5A = {
+						CreatedOnToolsVersion = 16.3;
+						TestTargetID = E38C6D892DE0C41D000B5D5A;
+					};
+				};
+			};
+			buildConfigurationList = E38C6D852DE0C41D000B5D5A /* Build configuration list for PBXProject "unisplashClone" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = E38C6D812DE0C41D000B5D5A;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = E38C6D8B2DE0C41D000B5D5A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E38C6D892DE0C41D000B5D5A /* unisplashClone */,
+				E38C6D962DE0C41E000B5D5A /* unisplashCloneTests */,
+				E38C6DA02DE0C41E000B5D5A /* unisplashCloneUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E38C6D882DE0C41D000B5D5A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E38C6D952DE0C41E000B5D5A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E38C6D9F2DE0C41E000B5D5A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E38C6D862DE0C41D000B5D5A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E38C6D932DE0C41E000B5D5A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E38C6D9D2DE0C41E000B5D5A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E38C6D992DE0C41E000B5D5A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E38C6D892DE0C41D000B5D5A /* unisplashClone */;
+			targetProxy = E38C6D982DE0C41E000B5D5A /* PBXContainerItemProxy */;
+		};
+		E38C6DA32DE0C41E000B5D5A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E38C6D892DE0C41D000B5D5A /* unisplashClone */;
+			targetProxy = E38C6DA22DE0C41E000B5D5A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		E38C6DA92DE0C41F000B5D5A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = CLN236LPY2;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		E38C6DAA2DE0C41F000B5D5A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = CLN236LPY2;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		E38C6DAC2DE0C41F000B5D5A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = CLN236LPY2;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = despo.unisplashClone;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E38C6DAD2DE0C41F000B5D5A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = CLN236LPY2;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = despo.unisplashClone;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		E38C6DAF2DE0C41F000B5D5A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = CLN236LPY2;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = despo.unisplashCloneTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/unisplashClone.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/unisplashClone";
+			};
+			name = Debug;
+		};
+		E38C6DB02DE0C41F000B5D5A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = CLN236LPY2;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = despo.unisplashCloneTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/unisplashClone.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/unisplashClone";
+			};
+			name = Release;
+		};
+		E38C6DB22DE0C41F000B5D5A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = CLN236LPY2;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = despo.unisplashCloneUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = unisplashClone;
+			};
+			name = Debug;
+		};
+		E38C6DB32DE0C41F000B5D5A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = CLN236LPY2;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = despo.unisplashCloneUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = unisplashClone;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E38C6D852DE0C41D000B5D5A /* Build configuration list for PBXProject "unisplashClone" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E38C6DA92DE0C41F000B5D5A /* Debug */,
+				E38C6DAA2DE0C41F000B5D5A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E38C6DAB2DE0C41F000B5D5A /* Build configuration list for PBXNativeTarget "unisplashClone" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E38C6DAC2DE0C41F000B5D5A /* Debug */,
+				E38C6DAD2DE0C41F000B5D5A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E38C6DAE2DE0C41F000B5D5A /* Build configuration list for PBXNativeTarget "unisplashCloneTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E38C6DAF2DE0C41F000B5D5A /* Debug */,
+				E38C6DB02DE0C41F000B5D5A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E38C6DB12DE0C41F000B5D5A /* Build configuration list for PBXNativeTarget "unisplashCloneUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E38C6DB22DE0C41F000B5D5A /* Debug */,
+				E38C6DB32DE0C41F000B5D5A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E38C6D822DE0C41D000B5D5A /* Project object */;
+}
