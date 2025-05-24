@@ -16,7 +16,16 @@ final class SearchViewModel {
   var searchHistory: [HistoryModel] = []
   var query: String = ""
   var page: Int = 1
-  var order: String = "relevant"
+  var order: SearchOrder = .relevant {
+          didSet {
+              performSearch()
+          }
+      }
+  var orientation: SearchOrientation = .all {
+    didSet {
+        performSearch()
+    }
+  }
   
   init(networkManager: NetworkManagerProtocol = NetworkManager()) {
     self.networkManager = networkManager
@@ -47,6 +56,9 @@ final class SearchViewModel {
   
   func performSearch() {
     var api = "https://api.unsplash.com/search/photos?query=\(query)&page=\(page)&client_id=aKp3tkGrA21Q1ViIZOSHRkuV9niWzL2pc0ACPVtX-Us&order_by=\(order)"
+    if orientation != .all {
+      api += "&orientation=\(orientation.rawValue)"
+    }
     saveHistory()
     
     Task {

@@ -12,7 +12,24 @@ struct SearchView: View {
   
   var body: some View {
     NavigationStack {
-      VStack {        
+      VStack {
+        
+        VStack(spacing: 0) {
+          Picker("Order by", selection: $vm.order) {
+            ForEach(SearchOrder.allCases) { order in
+                    Text(order.displayName).tag(order)
+                }
+          }
+          .pickerStyle(.segmented)
+          Picker("Order by", selection: $vm.orientation) {
+            ForEach(SearchOrientation.allCases) { orientation in
+                    Text(orientation.displayName).tag(orientation)
+                }
+          }
+          .pickerStyle(.segmented)
+        }
+        .padding(.horizontal, 20)
+        
         ScrollView {
           if vm.searchedPhotos.isEmpty {
             if vm.searchHistory.isEmpty {
