@@ -16,7 +16,7 @@ struct LayoutPhotoView: View {
       switch phase {
       case .empty:
         ProgressView()
-          .frame(height: isGridMode ? 150 : nil)
+          .frame(height: 150)
       case .success(let image):
         if isGridMode {
           image

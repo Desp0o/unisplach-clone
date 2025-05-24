@@ -16,19 +16,20 @@ final class MainViewModel {
   var images: [PhotoResponseModel] = []
   var isDissapeared: Bool = false
   var gridMode: Bool = false
+  var page: Int = 1
   
   init(networkManager: NetworkManagerProtocol = NetworkManager()) {
     self.networkManager = networkManager
   }
   
   func fetchImages() {
-    let url = "https://api.unsplash.com/photos?page=1&per_page=10&client_id=aKp3tkGrA21Q1ViIZOSHRkuV9niWzL2pc0ACPVtX-Us"
+    let url = "https://api.unsplash.com/photos?page=\(page)&per_page=10&client_id=aKp3tkGrA21Q1ViIZOSHRkuV9niWzL2pc0ACPVtX-Us"
     
     Task {
       do {
         let fetchedData: [PhotoResponseModel] = try await networkManager.networkCall(api: url)
         
-        images = fetchedData
+        images.append(contentsOf: fetchedData)
         print(images.count)
       } catch {
         print(error)

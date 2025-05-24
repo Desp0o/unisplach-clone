@@ -45,8 +45,15 @@ struct MainView: View {
           LazyVGrid(columns: vm.gridMode
                     ? [GridItem(), GridItem()]
                     : [GridItem()], spacing: vm.gridMode ? 4 : 0) {
-            ForEach(vm.images, id: \.id) { photo in
+            ForEach(vm.images.indices, id: \.self) { index in
+              let photo = vm.images[index]
               LayoutPhotoView(url: photo.urls.small, isGridMode: vm.gridMode)
+                .onAppear {
+                  if index == vm.images.count - 2 {
+                    vm.page += 1
+                    vm.fetchImages()
+                  }
+                }
             }
           }
         }
