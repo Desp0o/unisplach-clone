@@ -6,13 +6,17 @@
 //
 
 enum IconsEnum: String {
-  case person
-  case magnifyingglass
-  case photo
-  case arrowDown = "arrow.down"
-  case heart
-  case heartFill = "heart.fill"
-  case sun = "sun.max"
-  case moon
+  case person //sf
+  case magnifyingglass //sf
+  case photo //sf
+  case arrowDown = "arrow.down" //sf
+  case heart //sf
+  case heartFill = "heart.fill" //sf
+  case sun = "sun.max" //sf
+  case moon //sf
+  case squareGrid = "square.grid.2x2" //sf
+  case rectangle // sf
+  case logo
+  
 }
 
