@@ -14,75 +14,46 @@ struct MainView: View {
   
   var body: some View {
     VStack(spacing: 0) {
-      HStack {
-        Image(IconsEnum.logo.rawValue)
-          .imageCustomSettings(width: 18, height: 18)
-        
-        Spacer()
-        
-        Text("Unisplash")
-          .customTextStyle(fontSize: 20, fontWeight: .bold)
-        
-        Spacer()
-        
-        Button {
-          vm.changeGridLayout()
-        } label: {
-          Image(systemName: vm.gridMode ? IconsEnum.rectangle.rawValue : IconsEnum.squareGrid.rawValue)
-            .imageCustomSettings(width: 18, height: 18)
-            .foregroundStyle(Color.primary)
-        }
-      }
-      .padding(20)
-      .overlay(
-        Rectangle()
-          .frame(height: 1)
-          .foregroundColor(.customGray.opacity(0.3)),
-        alignment: .bottom
-      )
+      MainViewHeader(vm: vm)
       
-      if vm.isloading {
-        VStack {
-          ProgressView()
-            .scaleEffect(1.5)
-            .tint(Color.primary)
-        }
-        .frame(maxHeight: .infinity)
-      } else if vm.isError {
-        VStack(spacing: 10) {
-          Text("Something Went Wrong!")
-            .customTextStyle(fontWeight: .semibold, fontColor: .customGray)
-          
-          Button {
-            vm.isloading = true
-            vm.fetchImages()
-          } label: {
-            Text("Try again")
-              .customTextStyle(fontWeight: .semibold, fontColor: .customGray)
-              .padding(.horizontal, 10)
-              .padding(.vertical, 5)
-              .background(.thinMaterial)
-              .clipShape(RoundedRectangle(cornerRadius: 8))
-          }
-        }
-        .frame(maxHeight: .infinity)
+      if vm.isError {
+        MainViewTryAgainButton(vm: vm)
       } else {
         ScrollViewReader { proxy in
           ScrollView {
-            LazyVGrid(columns: vm.gridMode
-                      ? [GridItem(), GridItem()]
-                      : [GridItem()], spacing: vm.gridMode ? 4 : 0) {
+            LazyVGrid(columns: vm.gridMode ? [GridItem(), GridItem()] : [GridItem()], spacing: vm.gridMode ? 4 : 0) {
               ForEach(vm.images.indices, id: \.self) { index in
                 let photo = vm.images[index]
+                let isSelected = vm.selectedPhotos.contains(photo.urls.small)
+                
                 LayoutPhotoView(url: photo.urls.small, isGridMode: vm.gridMode)
                   .onTapGesture {
-                    print(photo.id)
-                    
-                    withAnimation(.spring()) {
-                      selectedPhoto = photo
+                    withAnimation {
+                      if vm.isLongPressed {
+                        if isSelected {
+                          vm.selectedPhotos.remove(photo.urls.small)
+                        } else {
+                          vm.selectedPhotos.insert(photo.urls.small)
+                        }
+                      } else {
+                        selectedPhoto = photo
+                      }
                     }
                   }
-                  .onAppear {
+                  .onLongPressGesture {
+                    withAnimation {
+                      vm.isLongPressed = true
+                    }
+                  }
+                  .overlay(alignment: .topTrailing) {
+                    if vm.isLongPressed {
+                      Image(systemName: isSelected ? IconsEnum.checkmarkCircle.rawValue : IconsEnum.circle.rawValue)
+                        .foregroundStyle(isSelected ? .green : .customGray)
+                        .frame(width: 32, height: 32)
+                        .padding(6)
+                    }
+                  }
+                  .task {
                     if index == vm.images.count - 4 {
                       vm.page += 1
                       vm.fetchImages()
@@ -107,7 +78,25 @@ struct MainView: View {
       if let photo = selectedPhoto {
         SinglePhotoView(selectedPhoto: $selectedPhoto, photo: photo)
       }
+      
+      if vm.isLongPressed {
+        VStack {
+          Spacer()
+          
+          MultipleDownloaderBar {
+            vm.deselectImages()
+          } download: {
+            vm.downloadAllSelectedPhotos()
+          }
+        }
+        .padding(.bottom, 50)
+        .transition(.asymmetric(insertion: .move(edge: .bottom), removal: .move(edge: .bottom)))
+      }
     }
+    .customAlert(isError: $vm.isDownloadError, message: vm.message)
+    .toast(isVisible: $vm.isSuccess, message: vm.message)
+    .loading(isLoading: vm.isDownlaodingPhotos)
+    .loading(isLoading: vm.isloading)
     .task {
       vm.fetchImages()
     }
