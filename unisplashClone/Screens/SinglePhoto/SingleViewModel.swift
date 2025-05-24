@@ -10,13 +10,19 @@ import Observation
 @MainActor
 @Observable
 final class SingleViewModel {
+  private let networkManager: NetworkManagerProtocol
   private let photoSaverManager: PhotoSaverManager
+  var photoDetails: SinglePhotoDetailsModel? = nil
   var message: String = ""
   var isError: Bool = false
   var isSuccess: Bool = false
   var isLoading: Bool = false
   
-  init(photoSaverManager: PhotoSaverManager = PhotoSaverManager()) {
+  init(
+    networkManager: NetworkManagerProtocol = NetworkManager(),
+    photoSaverManager: PhotoSaverManager = PhotoSaverManager()
+  ) {
+    self.networkManager = networkManager
     self.photoSaverManager = photoSaverManager
   }
   
@@ -38,4 +44,19 @@ final class SingleViewModel {
       }
     }
   }
+  
+  func getPhotoDetail(id: String) {
+    let api = APIEndpoinstEnum.singlePhotoDetail(id: id).url
+    
+    Task {
+      do {
+        let response: SinglePhotoDetailsModel = try await networkManager.networkCall(api: api)
+        photoDetails = response
+      } catch {
+        print(error)
+      }
+    }
+  }
 }
+
+

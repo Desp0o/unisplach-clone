@@ -7,18 +7,8 @@
 
 struct PhotoResponseModel: Codable {
   let id: String
-  let createdAt: String?
-  let blurHash: String?
-  let altDescription: String?
   let urls: PhotoURLsModel
-  let likes: Int
   let user: UserModel
-  
-  enum CodingKeys: String, CodingKey {
-    case id, blurHash, urls, likes, user
-    case createdAt = "created_at"
-    case altDescription = "alt_description"
-  }
 }
 
 struct PhotoURLsModel: Codable {
@@ -47,4 +37,28 @@ struct ProfileImageModel: Codable {
   let small: String
   let medium: String
   let large: String
+}
+
+struct SinglePhotoDetailsModel: Codable {
+  let width: Int
+  let height: Int
+  let exif: Exif
+  let altDescription: String?
+  let createdAt: String
+  
+  enum CodingKeys: String, CodingKey {
+    case width, height, exif
+    case createdAt = "created_at"
+    case altDescription = "alt_description"
+  }
+}
+
+struct Exif: Codable {
+  let make: String?
+  let model: String?
+  let name: String?
+  let exposureTime: String?
+  let aperture: String?
+  let focalLength: Double?
+  let iso: Int?
 }
