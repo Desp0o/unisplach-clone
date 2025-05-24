@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SinglePhotoView: View {
+  @State private var vm = SingleViewModel()
   @Binding var selectedPhoto: PhotoResponseModel?
   let photo: PhotoResponseModel
   
@@ -71,7 +72,7 @@ struct SinglePhotoView: View {
               }
               
               Button {
-                
+                vm.savePhoto(url: photo.urls.regular)
               } label: {
                 ZStack {
                   Image(systemName: IconsEnum.arrowDown.rawValue)
