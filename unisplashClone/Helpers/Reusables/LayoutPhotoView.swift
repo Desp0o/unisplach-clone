@@ -16,6 +16,7 @@ struct LayoutPhotoView: View {
       CachedAsyncImage(url: URL(string: url))
         .scaledToFill()
         .frame(width: UIScreen.main.bounds.width / 2, height: 150)
+        .contentShape(Rectangle())
         .clipped()
     } else {
       CachedAsyncImage(url: URL(string: url))

@@ -16,6 +16,8 @@ enum IconsEnum: String {
   case moon //sf
   case squareGrid = "square.grid.2x2" //sf
   case rectangle // sf
+  case circle //sf
+  case checkmarkCircle = "checkmark.circle.fill" //sf
   case logo
   
 }
