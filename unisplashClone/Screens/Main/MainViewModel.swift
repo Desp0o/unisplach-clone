@@ -30,7 +30,6 @@ final class MainViewModel {
         let fetchedData: [PhotoResponseModel] = try await networkManager.networkCall(api: url)
         
         images.append(contentsOf: fetchedData)
-        print(images.count)
       } catch {
         print(error)
       }

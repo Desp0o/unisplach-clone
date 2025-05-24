@@ -12,29 +12,15 @@ struct LayoutPhotoView: View {
   let isGridMode: Bool
   
   var body: some View {
-    AsyncImage(url: URL(string: url)) { phase in
-      switch phase {
-      case .empty:
-        ProgressView()
-          .frame(height: 150)
-      case .success(let image):
-        if isGridMode {
-          image
-            .resizable()
-            .scaledToFill()
-            .frame(width: UIScreen.main.bounds.width / 2, height: 150)
-            .clipped()
-        } else {
-          image
-            .resizable()
-            .scaledToFit()
-            .frame(maxWidth: .infinity)
-        }
-      case .failure:
-        EmptyView()
-      @unknown default:
-        EmptyView()
-      }
+    if isGridMode {
+      CachedAsyncImage(url: URL(string: url))
+        .scaledToFill()
+        .frame(width: UIScreen.main.bounds.width / 2, height: 150)
+        .clipped()
+    } else {
+      CachedAsyncImage(url: URL(string: url))
+        .scaledToFit()
+        .frame(maxWidth: .infinity)
     }
   }
 }

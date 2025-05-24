@@ -49,7 +49,7 @@ struct MainView: View {
               let photo = vm.images[index]
               LayoutPhotoView(url: photo.urls.small, isGridMode: vm.gridMode)
                 .onAppear {
-                  if index == vm.images.count - 2 {
+                  if index == vm.images.count - 4 {
                     vm.page += 1
                     vm.fetchImages()
                   }
