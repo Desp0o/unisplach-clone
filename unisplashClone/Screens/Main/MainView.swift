@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct MainView: View {
+  @State var vm = MainViewModel()
+  
     var body: some View {
       VStack(spacing: 0) {
         HStack {
@@ -36,9 +38,29 @@ struct MainView: View {
             .foregroundColor(.customGray.opacity(0.3)),
           alignment: .bottom
         )
+        
+        ScrollView {
+          LazyVGrid(columns: [GridItem()], spacing: 0) {
+            ForEach(vm.images, id: \.id) { photo in
+              AsyncImage(url: URL(string: photo.urls.small)) { image in
+               
+                  image
+                    .resizable()
+                    .scaledToFit()
+                    .clipped()
+              } placeholder: {
+                ProgressView()
+              }
+            }
+          }
+          //
+        }
       }
       .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
       .background(.customDark)
+      .task {
+        vm.fetchImages()
+      }
     }
 }
 
