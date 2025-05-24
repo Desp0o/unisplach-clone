@@ -28,7 +28,7 @@ struct MainView: View {
         Button {
           vm.changeGridLayout()
         } label: {
-          Image(systemName: IconsEnum.squareGrid.rawValue)
+          Image(systemName: vm.gridMode ? IconsEnum.rectangle.rawValue : IconsEnum.squareGrid.rawValue)
             .imageCustomSettings(width: 18, height: 18)
             .foregroundStyle(Color.primary)
         }
@@ -41,36 +41,63 @@ struct MainView: View {
         alignment: .bottom
       )
       
-      ScrollViewReader { proxy in
-        ScrollView {
-          LazyVGrid(columns: vm.gridMode
-                    ? [GridItem(), GridItem()]
-                    : [GridItem()], spacing: vm.gridMode ? 4 : 0) {
-            ForEach(vm.images.indices, id: \.self) { index in
-              let photo = vm.images[index]
-              LayoutPhotoView(url: photo.urls.small, isGridMode: vm.gridMode)
-                .onTapGesture {
-                  print(photo.id)
-                  
-                  withAnimation(.spring()) {
-                    selectedPhoto = photo
-                  }
-                }
-                .onAppear {
-                  if index == vm.images.count - 4 {
-                    vm.page += 1
-                    vm.fetchImages()
-                  }
-                }
-            }
+      if vm.isloading {
+        VStack {
+          ProgressView()
+            .scaleEffect(1.5)
+            .tint(Color.primary)
+        }
+        .frame(maxHeight: .infinity)
+      } else if vm.isError {
+        VStack(spacing: 10) {
+          Text("Something Went Wrong!")
+            .customTextStyle(fontWeight: .semibold, fontColor: .customGray)
+          
+          Button {
+            vm.isloading = true
+            vm.fetchImages()
+          } label: {
+            Text("Try again")
+              .customTextStyle(fontWeight: .semibold, fontColor: .customGray)
+              .padding(.horizontal, 10)
+              .padding(.vertical, 5)
+              .background(.thinMaterial)
+              .clipShape(RoundedRectangle(cornerRadius: 8))
           }
         }
-        .id(scrollToTop)
-        .scrollIndicators(.hidden)
-        .opacity(vm.isDissapeared ? 0 : 1)
-        .onChange(of: vm.gridMode) {
-          scrollToTop = UUID()
-          proxy.scrollTo(scrollToTop, anchor: .top)
+        .frame(maxHeight: .infinity)
+      } else {
+        ScrollViewReader { proxy in
+          ScrollView {
+            LazyVGrid(columns: vm.gridMode
+                      ? [GridItem(), GridItem()]
+                      : [GridItem()], spacing: vm.gridMode ? 4 : 0) {
+              ForEach(vm.images.indices, id: \.self) { index in
+                let photo = vm.images[index]
+                LayoutPhotoView(url: photo.urls.small, isGridMode: vm.gridMode)
+                  .onTapGesture {
+                    print(photo.id)
+                    
+                    withAnimation(.spring()) {
+                      selectedPhoto = photo
+                    }
+                  }
+                  .onAppear {
+                    if index == vm.images.count - 4 {
+                      vm.page += 1
+                      vm.fetchImages()
+                    }
+                  }
+              }
+            }
+          }
+          .id(scrollToTop)
+          .scrollIndicators(.hidden)
+          .opacity(vm.isDissapeared ? 0 : 1)
+          .onChange(of: vm.gridMode) {
+            scrollToTop = UUID()
+            proxy.scrollTo(scrollToTop, anchor: .top)
+          }
         }
       }
     }

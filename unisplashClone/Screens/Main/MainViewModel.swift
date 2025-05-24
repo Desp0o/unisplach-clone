@@ -17,6 +17,8 @@ final class MainViewModel {
   var isDissapeared: Bool = false
   var gridMode: Bool = false
   var page: Int = 1
+  var isloading: Bool = true
+  var isError: Bool = false
   
   init(networkManager: NetworkManagerProtocol = NetworkManager()) {
     self.networkManager = networkManager
@@ -26,12 +28,16 @@ final class MainViewModel {
     let url = "https://api.unsplash.com/photos?page=\(page)&per_page=10&client_id=aKp3tkGrA21Q1ViIZOSHRkuV9niWzL2pc0ACPVtX-Us"
     
     Task {
+      defer {
+        isloading = false
+      }
+      
       do {
         let fetchedData: [PhotoResponseModel] = try await networkManager.networkCall(api: url)
         
         images.append(contentsOf: fetchedData)
       } catch {
-        print(error)
+        isError = true
       }
     }
   }

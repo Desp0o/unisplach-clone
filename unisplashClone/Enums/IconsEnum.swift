@@ -15,6 +15,8 @@ enum IconsEnum: String {
   case sun = "sun.max" //sf
   case moon //sf
   case squareGrid = "square.grid.2x2" //sf
+  case rectangle // sf
   case logo
+  
 }
 
