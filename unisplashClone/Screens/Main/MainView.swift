@@ -10,6 +10,7 @@ import SwiftUI
 struct MainView: View {
   @State var vm = MainViewModel()
   @State private var scrollToTop: UUID = UUID()
+  @State private var selectedPhoto: PhotoResponseModel? = nil
   
   var body: some View {
     VStack(spacing: 0) {
@@ -48,6 +49,13 @@ struct MainView: View {
             ForEach(vm.images.indices, id: \.self) { index in
               let photo = vm.images[index]
               LayoutPhotoView(url: photo.urls.small, isGridMode: vm.gridMode)
+                .onTapGesture {
+                  print(photo.id)
+                  
+                  withAnimation(.spring()) {
+                    selectedPhoto = photo
+                  }
+                }
                 .onAppear {
                   if index == vm.images.count - 4 {
                     vm.page += 1
@@ -68,6 +76,11 @@ struct MainView: View {
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
     .background(.customDark)
+    .overlay {
+      if let photo = selectedPhoto {
+        SinglePhotoView(selectedPhoto: $selectedPhoto, photo: photo)
+      }
+    }
     .task {
       vm.fetchImages()
     }
@@ -77,3 +90,4 @@ struct MainView: View {
 #Preview {
   MainView()
 }
+

@@ -8,12 +8,17 @@
 struct PhotoResponseModel: Codable {
   let id: String
   let createdAt: String?
-  let color: String
   let blurHash: String?
-  let description: String?
+  let altDescription: String?
   let urls: PhotoURLsModel
   let likes: Int
   let user: UserModel
+  
+  enum CodingKeys: String, CodingKey {
+    case id, blurHash, urls, likes, user
+    case createdAt = "created_at"
+    case altDescription = "alt_description"
+  }
 }
 
 struct PhotoURLsModel: Codable {
