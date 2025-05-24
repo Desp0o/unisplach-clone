@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SinglePhotoView: View {
   @State private var vm = SingleViewModel()
+  @State private var isSheetVisible = false
   @Binding var selectedPhoto: PhotoResponseModel?
   let photo: PhotoResponseModel
   
@@ -53,8 +54,13 @@ struct SinglePhotoView: View {
           Spacer()
           
           HStack(alignment: .bottom) {
-            Text(photo.altDescription ?? "")
-              .customTextStyle(fontSize: 14, fontColor: .white)
+            Image(systemName: IconsEnum.info.rawValue)
+              .imageCustomSettings()
+              .foregroundStyle(.white)
+              .frame(width: 24, height: 24)
+              .onTapGesture {
+                isSheetVisible = true
+              }
             
             Spacer()
             
@@ -94,5 +100,13 @@ struct SinglePhotoView: View {
     .customAlert(isError: $vm.isError, message: vm.message)
     .loading(isLoading: vm.isLoading)
     .toast(isVisible: $vm.isSuccess, message: vm.message)
+    .sheet(isPresented: $isSheetVisible) {
+      if let detail = vm.photoDetails {
+        PhotoDetails(details: detail)
+      }
+    }
+    .task {
+      vm.getPhotoDetail(id: photo.id)
+    }
   }
 }

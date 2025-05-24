@@ -7,15 +7,8 @@
 
 struct PhotoResponseModel: Codable {
   let id: String
-  let altDescription: String?
   let urls: PhotoURLsModel
-  let likes: Int
   let user: UserModel
-  
-  enum CodingKeys: String, CodingKey {
-    case id, urls, likes, user
-    case altDescription = "alt_description"
-  }
 }
 
 struct PhotoURLsModel: Codable {
@@ -50,15 +43,22 @@ struct SinglePhotoDetailsModel: Codable {
   let width: Int
   let height: Int
   let exif: Exif
+  let altDescription: String?
+  let createdAt: String
+  
+  enum CodingKeys: String, CodingKey {
+    case width, height, exif
+    case createdAt = "created_at"
+    case altDescription = "alt_description"
+  }
 }
 
 struct Exif: Codable {
-  let make: String
-  let model: String
-  let name: String
-  let exposureTime: String
-  let aperture: Double
-  let focalLength: Double
-  let iso: Int
-  let createdAt: String
+  let make: String?
+  let model: String?
+  let name: String?
+  let exposureTime: String?
+  let aperture: String?
+  let focalLength: Double?
+  let iso: Int?
 }

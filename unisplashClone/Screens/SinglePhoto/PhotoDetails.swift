@@ -8,45 +8,56 @@
 import SwiftUI
 
 struct PhotoDetails: View {
-    var body: some View {
-      VStack {
-        HStack {
-          
-        }
+  let details: SinglePhotoDetailsModel
+  
+  var body: some View {
+    VStack(alignment: .leading, spacing: 30) {
+      HStack(alignment: .center) {
+        Spacer()
         
-        Divider()
-          .background(.customGray)
+        Text("Info")
+          .customTextStyle(fontSize: 20, fontWeight: .bold)
         
-        VStack(alignment: .leading) {
-          Text("Camera")
-            .customTextStyle(fontSize: 20, fontWeight: .semibold)
+        Spacer()
+      }
+      
+      Divider()
+        .background(.customGray)
+      
+      VStack(alignment: .leading, spacing: 10) {
+        Text("Camera")
+          .customTextStyle(fontSize: 20, fontWeight: .semibold)
+        
+        HStack(alignment: .top, spacing: 50) {
           
-          HStack(alignment: .top) {
-            
-            VStack {
-              photoDetail(key: "Make", value: "Canon")
-              photoDetail(key: "Make", value: "Canon")
-              photoDetail(key: "Make", value: "Canon")
-              photoDetail(key: "Make", value: "Canon")
-            }
-            
-            
-            
-            VStack {
-              photoDetail(key: "Make", value: "Canon")
-              photoDetail(key: "Make", value: "Canon")
-              photoDetail(key: "Make", value: "Canon")
-              photoDetail(key: "Make", value: "Canon")
-            }
-            
+          VStack(alignment: .leading, spacing: 5) {
+            photoDetail(key: "Make", value: details.exif.make ?? "No info")
+            photoDetail(key: "Model", value: details.exif.model ?? "No info")
+            photoDetail(key: "Shutter Speed (s)", value: details.exif.exposureTime ?? "No info")
+            photoDetail(key: "Aperture", value: details.exif.aperture ?? "No info")
+          }
+          
+          VStack(alignment: .leading, spacing: 5) {
+            photoDetail(key: "Focal Lenght (mm)", value: details.exif.focalLength.map { "\($0)" } ?? "No info")
+            photoDetail(key: "ISO", value: details.exif.iso.map { "\($0)" } ?? "No info")
+            photoDetail(key: "Dimensions", value: "\(details.width) x \(details.height)")
           }
         }
-        .frame(maxWidth: .infinity, alignment: .topLeading)
       }
-      .frame(maxWidth: .infinity, maxHeight: .infinity)
-      .padding()
-      .background(.customDark)
+      .frame(maxWidth: .infinity, alignment: .topLeading)
+      
+      VStack(alignment: .leading, spacing: 5) {
+        Text("Description")
+          .customTextStyle(fontSize: 16, fontWeight: .thin)
+        
+        Text(details.altDescription ?? "")
+          .customTextStyle(fontSize: 15, fontWeight: .semibold)
+      }
     }
+    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+    .padding()
+    .background(.customDark)
+  }
   
   @ViewBuilder
   func photoDetail(key: String, value: String) -> some View {
@@ -61,6 +72,22 @@ struct PhotoDetails: View {
 }
 
 #Preview {
-    PhotoDetails()
-    .preferredColorScheme(.dark)
+  PhotoDetails(
+    details: SinglePhotoDetailsModel(
+      width: 3600,
+      height: 4200,
+      exif: Exif(
+        make: "Canon",
+        model: "EOS 720D",
+        name: "Canon, EOS Rebel SL3",
+        exposureTime: "1/200",
+        aperture: "4.0",
+        focalLength: 50.0,
+        iso: 100
+      ),
+      altDescription: "This is alt description",
+      createdAt: ""
+    )
+  )
+  .preferredColorScheme(.dark)
 }
