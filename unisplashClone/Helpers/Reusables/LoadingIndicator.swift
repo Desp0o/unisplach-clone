@@ -8,16 +8,29 @@
 import SwiftUI
 
 struct LoadingIndicator: View {
+  let isLoading: Bool
+  
   var body: some View {
-    VStack {
-      ProgressView()
-        .scaleEffect(1.5)
-        .tint(Color.primary)
+    if isLoading {
+      VStack {
+        ProgressView()
+          .scaleEffect(2)
+          .tint(Color.primary)
+      }
+      .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
-    .frame(maxWidth: .infinity, maxHeight: .infinity)
   }
 }
 
-#Preview {
-  LoadingIndicator()
+
+
+struct LoadingModifier: ViewModifier {
+  let loading: LoadingIndicator
+  
+  public func body(content: Content) -> some View {
+    content
+      .overlay {
+        loading
+      }
+  }
 }

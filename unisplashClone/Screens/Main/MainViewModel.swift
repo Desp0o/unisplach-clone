@@ -23,7 +23,9 @@ final class MainViewModel {
   var gridMode: Bool = false
   var isloading: Bool = true
   var isError: Bool = false
+  var isSuccess: Bool = false
   var isDownloadError: Bool = false
+  var isDownlaodingPhotos: Bool = false
   
   init(
     networkManager: NetworkManagerProtocol = NetworkManager(),
@@ -82,9 +84,22 @@ final class MainViewModel {
   }
   
   func downloadAllSelectedPhotos() {
+    isDownlaodingPhotos = true
+    
     Task {
+      defer {
+        isDownlaodingPhotos = false
+      }
+      
       do {
         try await photoSaverManager.downloadAndSaveImages(urls: Array(selectedPhotos))
+        message = "Download Complete"
+        isSuccess = true
+        selectedPhotos.removeAll()
+
+        withAnimation {
+          isLongPressed = false
+        }
       } catch let error as PhotoSaverErrorEnum {
         message = error.rawValue
         isDownloadError = true

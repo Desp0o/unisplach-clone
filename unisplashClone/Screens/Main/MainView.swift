@@ -16,9 +16,7 @@ struct MainView: View {
     VStack(spacing: 0) {
       MainViewHeader(vm: vm)
       
-      if vm.isloading {
-        LoadingIndicator()
-      } else if vm.isError {
+      if vm.isError {
         MainViewTryAgainButton(vm: vm)
       } else {
         ScrollViewReader { proxy in
@@ -96,6 +94,9 @@ struct MainView: View {
       }
     }
     .customAlert(isError: $vm.isDownloadError, message: vm.message)
+    .toast(isVisible: $vm.isSuccess, message: vm.message)
+    .loading(isLoading: vm.isDownlaodingPhotos)
+    .loading(isLoading: vm.isloading)
     .task {
       vm.fetchImages()
     }
