@@ -91,5 +91,6 @@ struct SinglePhotoView: View {
       }
     }
     .zIndex(1)
+    .customAlert(isError: $vm.isError, message: vm.message)
   }
 }
