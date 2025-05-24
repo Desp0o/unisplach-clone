@@ -46,12 +46,10 @@ struct MainView: View {
                     }
                   }
                   .overlay(alignment: .topTrailing) {
-                    if vm.isLongPressed {
-                      Image(systemName: isSelected ? IconsEnum.checkmarkCircle.rawValue : IconsEnum.circle.rawValue)
-                        .foregroundStyle(isSelected ? .green : .customGray)
-                        .frame(width: 32, height: 32)
-                        .padding(6)
-                    }
+                    SelectedMark(
+                      isLongPressed: vm.isLongPressed,
+                      isSelected: isSelected
+                    )
                   }
                   .task {
                     if index == vm.images.count - 4 {
