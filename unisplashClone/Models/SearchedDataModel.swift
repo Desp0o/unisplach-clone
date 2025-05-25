@@ -15,3 +15,9 @@ struct SearchedDataModel: Codable {
     case totalPage = "total_pages"
   }
 }
+
+
+struct HistoryModel: Codable {
+  let id: String
+  let keyword: String
+}

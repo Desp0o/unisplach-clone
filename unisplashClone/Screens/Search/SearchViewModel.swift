@@ -13,17 +13,19 @@ import Foundation
 final class SearchViewModel {
   private let networkManager: NetworkManagerProtocol
   var searchedPhotos: [PhotoResponseModel] = []
+  var searchResultQuantity: Int = 0
   var searchHistory: [HistoryModel] = []
+  var isLoading: Bool = false
   var query: String = ""
   var page: Int = 1
   var order: SearchOrder = .relevant {
-          didSet {
-              performSearch()
-          }
-      }
+    didSet {
+      performSearch()
+    }
+  }
   var orientation: SearchOrientation = .all {
     didSet {
-        performSearch()
+      performSearch()
     }
   }
   
@@ -54,27 +56,52 @@ final class SearchViewModel {
     searchHistory = []
   }
   
+  func removeSingleItemFromHistory(id: String) {
+      if let index = searchHistory.firstIndex(where: { $0.id == id }) {
+          searchHistory.remove(at: index)
+        
+        if let encoded = try? JSONEncoder().encode(searchHistory) {
+          UserDefaults.standard.set(encoded, forKey: "searchHistory")
+        }
+      }
+  }
+  
   func performSearch() {
+    isLoading = true
     var api = "https://api.unsplash.com/search/photos?query=\(query)&page=\(page)&client_id=aKp3tkGrA21Q1ViIZOSHRkuV9niWzL2pc0ACPVtX-Us&order_by=\(order)"
     if orientation != .all {
       api += "&orientation=\(orientation.rawValue)"
     }
-    saveHistory()
     
     Task {
+      defer {
+        isLoading = false
+      }
+      
       do {
         let response: SearchedDataModel = try await networkManager.networkCall(api: api)
         
         searchedPhotos = response.results
+        searchResultQuantity = response.total
         
       } catch {
         print(error.localizedDescription)
       }
     }
   }
+  
+  func performSearchByHistory(keyword: String) {
+    page = 1
+    query = keyword
+    order = .relevant
+    orientation = .all
+    
+    performSearch()
+  }
+  
+  func clearSearchResult() {
+    searchedPhotos = []
+    searchResultQuantity = 0
+  }
 }
 
-struct HistoryModel: Codable {
-  let id: String
-  let keyword: String
-}

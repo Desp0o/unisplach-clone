@@ -1,9 +1,10 @@
 //
-//  SearchModels.swift
+//  SearchOrder.swift
 //  unisplashClone
 //
 //  Created by Despo on 25.05.25.
 //
+
 
 enum SearchOrder: String, CaseIterable, Identifiable {
     case relevant = "relevant"
