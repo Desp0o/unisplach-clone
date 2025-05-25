@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct LikedPhotosView: View {
+  @State private var selectedPhoto: PhotoResponseModel? = nil
   let vm: ProfileViewModel
+  
   var body: some View {
     if vm.likedPhotos.isEmpty {
       Text("No photos liked yet")
@@ -24,9 +26,19 @@ struct LikedPhotosView: View {
                 .scaledToFill()
                 .frame(width: photoSize, height: photoSize)
                 .clipped()
+                .onTapGesture {
+                  selectedPhoto = photo
+                }
             }
           }
         }
+      }
+      .navigationDestination(item: $selectedPhoto) { photo in
+        SinglePhotoView(selectedPhoto: $selectedPhoto, photo: photo)
+          .toolbar(.hidden)
+          .onDisappear {
+            vm.loadLikedPhotosFromStorage()
+          }
       }
     }
   }
