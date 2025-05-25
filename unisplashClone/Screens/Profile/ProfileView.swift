@@ -8,11 +8,19 @@
 import SwiftUI
 
 struct ProfileView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+  @AppStorage("selectedTheme") private var selectedTheme: String = AppTheme.system.rawValue
+  
+  var body: some View {
+    Picker("Appearance", selection: $selectedTheme) {
+      ForEach(AppTheme.allCases) { theme in
+        Text(theme.displayName).tag(theme.id)
+      }
     }
+    .pickerStyle(.segmented)
+    .padding()
+  }
 }
 
 #Preview {
-    ProfileView()
+  ProfileView()
 }

@@ -9,10 +9,13 @@ import SwiftUI
 
 @main
 struct unisplashCloneApp: App {
+  @AppStorage("selectedTheme") private var selectedTheme: String = AppTheme.system.rawValue
+
     var body: some Scene {
         WindowGroup {
           NavigationStack {
             TabbarView()
+              .preferredColorScheme(AppTheme(rawValue: selectedTheme)?.colorScheme)
           }
         }
     }
