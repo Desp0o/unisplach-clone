@@ -19,6 +19,7 @@ struct LikedPhotosView: View {
     } else {
       GeometryReader { geometry in
         let photoSize = geometry.size.width / 4 - 2
+        
         ScrollView {
           LazyVGrid(columns: Array(repeating: GridItem(), count: 4)) {
             ForEach(vm.likedPhotos, id: \.id) { photo in

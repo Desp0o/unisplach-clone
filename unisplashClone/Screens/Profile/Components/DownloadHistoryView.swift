@@ -16,10 +16,10 @@ struct DownloadHistoryView: View {
         .customTextStyle(fontColor: .customGray)
         .offset(y: 40)
     } else {
-      ScrollView {
-        GeometryReader { geometry in
-          let photoWidth = geometry.size.width / 4 - 2
-          
+      GeometryReader { geometry in
+        let photoWidth = geometry.size.width / 4 - 2
+
+        ScrollView {
           LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 4), spacing: 2) {
             ForEach(vm.donwloadHistory, id: \.id) { photo in
               CachedAsyncImage(url: URL(string: photo.url))
