@@ -28,7 +28,7 @@ struct MainView: View {
                 
                 LayoutPhotoView(url: photo.urls.small, isGridMode: vm.gridMode)
                   .onTapGesture {
-                    withAnimation {
+                    withAnimation(.snappy(duration: 0.1)) {
                       if vm.isLongPressed {
                         if isSelected {
                           vm.selectedPhotos.remove(photo.urls.small)

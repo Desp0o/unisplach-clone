@@ -50,7 +50,7 @@ struct SearchView: View {
                     .contentShape(Rectangle())
                     .clipped()
                     .onTapGesture {
-                      withAnimation {
+                      withAnimation(.snappy(duration: 0.1)) {
                         if vm.isLongPressed {
                           if isSelected {
                             vm.selectedPhotos.remove(photo.urls.small)
@@ -58,9 +58,7 @@ struct SearchView: View {
                             vm.selectedPhotos.insert(photo.urls.small)
                           }
                         } else {
-                          withAnimation {
-                            selectedPhoto = photo
-                          }
+                          selectedPhoto = photo
                         }
                       }
                     }
