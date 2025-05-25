@@ -11,7 +11,7 @@ import Foundation
 @Observable
 final class ProfileViewModel {
   var donwloadHistory: [DownloadHistoryModel] = []
-  
+  var likedPhotos: [Int] = []
   init() {
     loadDownloadHistory()
   }

@@ -21,6 +21,6 @@ enum IconsEnum: String {
   case info = "info.circle" //sf
   case baclButton = "chevron.left" //sf
   case logo
-  
+  case avatar
 }
 

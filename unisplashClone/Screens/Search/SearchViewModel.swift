@@ -52,20 +52,20 @@ final class SearchViewModel: BaseViewModel {
       UserDefaults.standard.set(encoded, forKey: "searchHistory")
     }
   }
-    
+  
   func clearSearchHistory() {
     UserDefaults.standard.removeObject(forKey: "searchHistory")
     searchHistory = []
   }
   
   func removeSingleItemFromHistory(id: String) {
-      if let index = searchHistory.firstIndex(where: { $0.id == id }) {
-          searchHistory.remove(at: index)
-        
-        if let encoded = try? JSONEncoder().encode(searchHistory) {
-          UserDefaults.standard.set(encoded, forKey: "searchHistory")
-        }
+    if let index = searchHistory.firstIndex(where: { $0.id == id }) {
+      searchHistory.remove(at: index)
+      
+      if let encoded = try? JSONEncoder().encode(searchHistory) {
+        UserDefaults.standard.set(encoded, forKey: "searchHistory")
       }
+    }
   }
   
   private func loadHistory() {
@@ -74,7 +74,7 @@ final class SearchViewModel: BaseViewModel {
       searchHistory = decoded
     }
   }
-
+  
   func performSearch() {
     if searchedPhotos.isEmpty {
       isLoading = true
