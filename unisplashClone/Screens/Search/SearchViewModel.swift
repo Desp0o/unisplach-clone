@@ -11,21 +11,15 @@ import SwiftUI
 
 @MainActor
 @Observable
-final class SearchViewModel {
+final class SearchViewModel: BaseViewModel {
   private let networkManager: NetworkManagerProtocol
   private let photoSaverManager: PhotoSaverManager
   var searchedPhotos: [PhotoResponseModel] = []
   var searchHistory: [HistoryModel] = []
-  var selectedPhotos: Set<String> = []
   var searchResultQuantity: Int = 0
   var isLoading: Bool = false
-  var isLongPressed: Bool = false
   var query: String = ""
-  var message: String = ""
-  var isSuccess: Bool = false
-  var isError: Bool = false
-  var isDownlaodingPhotos: Bool = false
-  var page: Int = 1
+  
   var order: SearchOrder = .relevant {
     didSet {
       searchedPhotos = []
@@ -45,6 +39,7 @@ final class SearchViewModel {
   ) {
     self.networkManager = networkManager
     self.photoSaverManager = photoSaverManager
+    super.init()
     
     loadHistory()
   }
@@ -80,10 +75,11 @@ final class SearchViewModel {
     }
   }
 
-  
   func performSearch() {
-    isLoading = true
-    var api = "https://api.unsplash.com/search/photos?query=\(query)&page=\(page)&per_page=20&client_id=aKp3tkGrA21Q1ViIZOSHRkuV9niWzL2pc0ACPVtX-Us&order_by=\(order)"
+    if searchedPhotos.isEmpty {
+      isLoading = true
+    }
+    var api = "https://api.unsplash.com/search/photos?query=\(query)&page=\(page)&per_page=20&client_id=akXKH70mCBd9NsLvhnZEVwz8wVN0urhfmB2fKi7_ouU&order_by=\(order)"
     if orientation != .all {
       api += "&orientation=\(orientation.rawValue)"
     }
@@ -125,37 +121,8 @@ final class SearchViewModel {
     query = ""
   }
   
-  func deselectImages() {
-    selectedPhotos.removeAll()
-    
-    withAnimation {
-      isLongPressed = false
-    }
-  }
-  
-  func downloadAllSelectedPhotos() {
-    isDownlaodingPhotos = true
-    
-    Task {
-      defer {
-        isDownlaodingPhotos = false
-      }
-      
-      do {
-        try await photoSaverManager.downloadAndSaveImages(urls: Array(selectedPhotos))
-        
-        isSuccess = true
-        message = "Download Complete"
-        selectedPhotos.removeAll()
-
-        withAnimation {
-          isLongPressed = false
-        }
-      } catch let error as PhotoSaverErrorEnum {
-        message = error.rawValue
-        isError = true
-      }
-    }
+  func downloadPhotos() {
+    downloadAllSelectedPhotos(manager: photoSaverManager)
   }
 }
 
