@@ -16,6 +16,7 @@ final class SearchViewModel {
   var searchResultQuantity: Int = 0
   var searchHistory: [HistoryModel] = []
   var isLoading: Bool = false
+  var isLongPressed: Bool = false
   var query: String = ""
   var page: Int = 1
   var order: SearchOrder = .relevant {

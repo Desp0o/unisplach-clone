@@ -9,9 +9,43 @@ import SwiftUI
 
 struct SearchView: View {
   @State var vm = SearchViewModel()
+  @State private var selectedPhoto: PhotoResponseModel? = nil
+  @FocusState private var isSearchFocused: Bool
   
   var body: some View {
     VStack {
+      HStack {
+        HStack {
+          Image(systemName: IconsEnum.magnifyingglass.rawValue)
+            .foregroundColor(.gray)
+            .frame(width: 20, height: 20)
+          
+          TextField("Search Photo", text: $vm.query)
+            .focused($isSearchFocused)
+            .onSubmit {
+              if !vm.query.isEmpty {
+                vm.saveHistory()
+                vm.performSearch()
+                isSearchFocused = false
+              }
+            }
+        }
+        .padding(.horizontal, 12)
+        .padding(.vertical, 6)
+        .background(.customGray.opacity(0.2))
+        .cornerRadius(8)
+        
+        if !vm.query.isEmpty {
+          Button {
+            vm.query = ""
+          } label: {
+            Text("Cancel")
+              .customTextStyle(fontColor: .customGray)
+          }
+        }
+      }
+      .padding(.horizontal, 20)
+      .animation(.default, value: vm.query)
       
       VStack(spacing: 0) {
         Picker("Order by", selection: $vm.order) {
@@ -101,6 +135,21 @@ struct SearchView: View {
                   .frame(width: UIScreen.main.bounds.width / 2, height: 150)
                   .contentShape(Rectangle())
                   .clipped()
+                  .onTapGesture {
+                    withAnimation {
+                      if vm.isLongPressed {
+                        //                        if isSelected {
+                        //                          vm.selectedPhotos.remove(photo.urls.small)
+                        //                        } else {
+                        //                          vm.selectedPhotos.insert(photo.urls.small)
+                        //                        }
+                      } else {
+                        withAnimation {
+                          selectedPhoto = photo
+                        }
+                      }
+                    }
+                  }
               }
             }
           }
@@ -109,10 +158,10 @@ struct SearchView: View {
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
     .background(Color.customDark)
-    .searchable(text: $vm.query, prompt: Text("Search Photo"))
-    .onSubmit(of: .search) {
-      vm.saveHistory()
-      vm.performSearch()
+    .overlay {
+      if let photo = selectedPhoto {
+        SinglePhotoView(selectedPhoto: $selectedPhoto, photo: photo)
+      }
     }
     .loading(isLoading: vm.isLoading)
   }
@@ -122,5 +171,3 @@ struct SearchView: View {
   SearchView()
     .preferredColorScheme(.dark)
 }
-
-
