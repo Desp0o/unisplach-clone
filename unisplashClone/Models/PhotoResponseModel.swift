@@ -5,13 +5,13 @@
 //  Created by Despo on 24.05.25.
 //
 
-struct PhotoResponseModel: Codable {
+struct PhotoResponseModel: Codable, Hashable {
   let id: String
   let urls: PhotoURLsModel
   let user: UserModel
 }
 
-struct PhotoURLsModel: Codable {
+struct PhotoURLsModel: Codable, Hashable {
   let regular: String
   let small: String
   let thumb: String
@@ -23,7 +23,7 @@ struct PhotoURLsModel: Codable {
   }
 }
 
-struct UserModel: Codable {
+struct UserModel: Codable, Hashable {
   let id: String
   let name: String
   let profileImage: ProfileImageModel
@@ -33,13 +33,13 @@ struct UserModel: Codable {
   }
 }
 
-struct ProfileImageModel: Codable {
+struct ProfileImageModel: Codable, Hashable {
   let small: String
   let medium: String
   let large: String
 }
 
-struct SinglePhotoDetailsModel: Codable {
+struct SinglePhotoDetailsModel: Codable, Hashable {
   let width: Int
   let height: Int
   let exif: Exif
@@ -53,7 +53,7 @@ struct SinglePhotoDetailsModel: Codable {
   }
 }
 
-struct Exif: Codable {
+struct Exif: Codable, Hashable {
   let make: String?
   let model: String?
   let name: String?

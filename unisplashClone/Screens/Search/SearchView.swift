@@ -50,7 +50,7 @@ struct SearchView: View {
                     .contentShape(Rectangle())
                     .clipped()
                     .onTapGesture {
-                      withAnimation {
+                      withAnimation(.snappy(duration: 0.1)) {
                         if vm.isLongPressed {
                           if isSelected {
                             vm.selectedPhotos.remove(photo.urls.small)
@@ -58,9 +58,7 @@ struct SearchView: View {
                             vm.selectedPhotos.insert(photo.urls.small)
                           }
                         } else {
-                          withAnimation {
-                            selectedPhoto = photo
-                          }
+                          selectedPhoto = photo
                         }
                       }
                     }
@@ -90,10 +88,6 @@ struct SearchView: View {
     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
     .background(Color.customDark)
     .overlay {
-      if let photo = selectedPhoto {
-        SinglePhotoView(selectedPhoto: $selectedPhoto, photo: photo)
-      }
-      
       if vm.isLongPressed {
         VStack {
           Spacer()
@@ -112,6 +106,10 @@ struct SearchView: View {
     .toast(isVisible: $vm.isSuccess, message: vm.message)
     .loading(isLoading: vm.isLoading)
     .loading(isLoading: vm.isDownlaodingPhotos)
+    .navigationDestination(item: $selectedPhoto) { photo in
+      SinglePhotoView(selectedPhoto: $selectedPhoto, photo: photo)
+        .toolbar(.hidden)
+    }
   }
 }
 

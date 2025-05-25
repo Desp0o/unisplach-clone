@@ -28,7 +28,7 @@ struct MainView: View {
                 
                 LayoutPhotoView(url: photo.urls.small, isGridMode: vm.gridMode)
                   .onTapGesture {
-                    withAnimation {
+                    withAnimation(.snappy(duration: 0.1)) {
                       if vm.isLongPressed {
                         if isSelected {
                           vm.selectedPhotos.remove(photo.urls.small)
@@ -73,10 +73,6 @@ struct MainView: View {
     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
     .background(.customDark)
     .overlay {
-      if let photo = selectedPhoto {
-        SinglePhotoView(selectedPhoto: $selectedPhoto, photo: photo)
-      }
-      
       if vm.isLongPressed {
         VStack {
           Spacer()
@@ -97,6 +93,10 @@ struct MainView: View {
     .loading(isLoading: vm.isLoading)
     .task {
       vm.fetchImages()
+    }
+    .navigationDestination(item: $selectedPhoto) { photo in
+      SinglePhotoView(selectedPhoto: $selectedPhoto, photo: photo)
+        .toolbar(.hidden)
     }
   }
 }
