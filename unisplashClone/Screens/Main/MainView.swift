@@ -21,7 +21,7 @@ struct MainView: View {
       } else {
         ScrollViewReader { proxy in
           ScrollView {
-            LazyVGrid(columns: vm.gridMode ? [GridItem(), GridItem()] : [GridItem()], spacing: vm.gridMode ? 4 : 0) {
+            LazyVGrid(columns: vm.gridMode ? [GridItem(), GridItem()] : [GridItem()], spacing: vm.gridMode ? 4 : 2) {
               ForEach(vm.images.indices, id: \.self) { index in
                 let photo = vm.images[index]
                 let isSelected = vm.selectedPhotos.contains(photo.urls.small)
@@ -84,7 +84,7 @@ struct MainView: View {
           MultipleDownloaderBar {
             vm.deselectImages()
           } download: {
-            vm.downloadAllSelectedPhotos()
+            vm.downloadPhotos()
           }
         }
         .padding(.bottom, 50)
@@ -94,7 +94,7 @@ struct MainView: View {
     .customAlert(isError: $vm.isDownloadError, message: vm.message)
     .toast(isVisible: $vm.isSuccess, message: vm.message)
     .loading(isLoading: vm.isDownlaodingPhotos)
-    .loading(isLoading: vm.isloading)
+    .loading(isLoading: vm.isLoading)
     .task {
       vm.fetchImages()
     }

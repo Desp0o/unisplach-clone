@@ -101,14 +101,14 @@ struct SearchView: View {
           MultipleDownloaderBar {
             vm.deselectImages()
           } download: {
-            vm.downloadAllSelectedPhotos()
+            vm.downloadPhotos()
           }
         }
         .padding(.bottom, 50)
         .transition(.asymmetric(insertion: .move(edge: .bottom), removal: .move(edge: .bottom)))
       }
     }
-    .customAlert(isError: $vm.isError, message: vm.message)
+    .customAlert(isError: $vm.isDownloadError, message: vm.message)
     .toast(isVisible: $vm.isSuccess, message: vm.message)
     .loading(isLoading: vm.isLoading)
     .loading(isLoading: vm.isDownlaodingPhotos)

@@ -10,22 +10,14 @@ import SwiftUI
 
 @MainActor
 @Observable
-final class MainViewModel {
+final class MainViewModel: BaseViewModel {
   private let networkManager: NetworkManagerProtocol
   private let photoSaverManager: PhotoSaverManager
   private var animationTask: Task<Void, Error>?
   var images: [PhotoResponseModel] = []
-  var selectedPhotos: Set<String> = []
-  var message: String = ""
-  var page: Int = 1
-  var isLongPressed: Bool = false
   var isDissapeared: Bool = false
   var gridMode: Bool = false
-  var isloading: Bool = true
-  var isError: Bool = false
-  var isSuccess: Bool = false
-  var isDownloadError: Bool = false
-  var isDownlaodingPhotos: Bool = false
+  var isLoading: Bool = true
   
   init(
     networkManager: NetworkManagerProtocol = NetworkManager(),
@@ -40,7 +32,7 @@ final class MainViewModel {
     
     Task {
       defer {
-        isloading = false
+        isLoading = false
       }
       
       do {
@@ -75,35 +67,7 @@ final class MainViewModel {
     }
   }
   
-  func deselectImages() {
-    selectedPhotos.removeAll()
-    
-    withAnimation {
-      isLongPressed = false
-    }
-  }
-  
-  func downloadAllSelectedPhotos() {
-    isDownlaodingPhotos = true
-    
-    Task {
-      defer {
-        isDownlaodingPhotos = false
-      }
-      
-      do {
-        try await photoSaverManager.downloadAndSaveImages(urls: Array(selectedPhotos))
-        message = "Download Complete"
-        isSuccess = true
-        selectedPhotos.removeAll()
-
-        withAnimation {
-          isLongPressed = false
-        }
-      } catch let error as PhotoSaverErrorEnum {
-        message = error.rawValue
-        isDownloadError = true
-      }
-    }
+  func downloadPhotos() {
+    downloadAllSelectedPhotos(manager: photoSaverManager)
   }
 }

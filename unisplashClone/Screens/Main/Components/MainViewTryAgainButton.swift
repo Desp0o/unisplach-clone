@@ -16,7 +16,7 @@ struct MainViewTryAgainButton: View {
         .customTextStyle(fontWeight: .semibold, fontColor: .customGray)
       
       Button {
-        vm.isloading = true
+        vm.isLoading = true
         vm.fetchImages()
       } label: {
         Text("Try again")
