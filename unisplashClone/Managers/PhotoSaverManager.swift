@@ -25,6 +25,12 @@ final class PhotoSaverManager {
       throw PhotoSaverErrorEnum.permissionDenied
     }
     
+    var currentHistory: [DownloadHistoryModel] = []
+    if let savedData = UserDefaults.standard.data(forKey: "downloadHistory"),
+       let decoded = try? JSONDecoder().decode([DownloadHistoryModel].self, from: savedData) {
+      currentHistory = decoded
+    }
+    
     for url in urls {
       do {
         let data = try await networkManager.downloadImageData(from: url)
@@ -32,6 +38,13 @@ final class PhotoSaverManager {
           throw PhotoSaverErrorEnum.downloadFailed
         }
         try await saveImageToPhotoLibrary(image: image)
+        
+        let newData = DownloadHistoryModel(id: UUID().uuidString, url: url)
+        currentHistory.append(newData)
+        
+        if let encoded = try? JSONEncoder().encode(currentHistory) {
+          UserDefaults.standard.set(encoded, forKey: "downloadHistory")
+        }
       } catch {
         throw PhotoSaverErrorEnum.downloadFailed
       }

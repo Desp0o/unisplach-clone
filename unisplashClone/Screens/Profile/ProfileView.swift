@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ProfileView: View {
   @AppStorage("selectedTheme") private var selectedTheme: String = AppTheme.system.rawValue
+  @State private var vm = ProfileViewModel()
   
   var body: some View {
     Picker("Appearance", selection: $selectedTheme) {
