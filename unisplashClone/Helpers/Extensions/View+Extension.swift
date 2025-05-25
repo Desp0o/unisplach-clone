@@ -6,6 +6,7 @@
 //
 
 import SwiftUICore
+import SwiftUI
 
 extension View {
   func customAlert(isError: Binding<Bool>, message: String) -> some View {
@@ -22,5 +23,18 @@ extension View {
 extension View {
   func loading(isLoading: Bool) -> some View {
     modifier(LoadingModifier(loading: LoadingIndicator(isLoading: isLoading)))
+  }
+}
+
+extension View {
+  func swipeToDismiss(dismiss: DismissAction) -> some View {
+    self.gesture(
+      DragGesture()
+        .onEnded { value in
+          if value.translation.width > 50 {
+            dismiss()
+          }
+        }
+    )
   }
 }

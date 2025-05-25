@@ -19,6 +19,7 @@ enum IconsEnum: String {
   case circle //sf
   case checkmarkCircle = "checkmark.circle.fill" //sf
   case info = "info.circle" //sf
+  case baclButton = "chevron.left" //sf
   case logo
   
 }

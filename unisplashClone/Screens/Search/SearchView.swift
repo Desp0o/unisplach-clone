@@ -90,10 +90,6 @@ struct SearchView: View {
     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
     .background(Color.customDark)
     .overlay {
-      if let photo = selectedPhoto {
-        SinglePhotoView(selectedPhoto: $selectedPhoto, photo: photo)
-      }
-      
       if vm.isLongPressed {
         VStack {
           Spacer()
@@ -112,6 +108,10 @@ struct SearchView: View {
     .toast(isVisible: $vm.isSuccess, message: vm.message)
     .loading(isLoading: vm.isLoading)
     .loading(isLoading: vm.isDownlaodingPhotos)
+    .navigationDestination(item: $selectedPhoto) { photo in
+      SinglePhotoView(selectedPhoto: $selectedPhoto, photo: photo)
+        .toolbar(.hidden)
+    }
   }
 }
 
