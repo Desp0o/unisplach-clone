@@ -49,6 +49,15 @@ struct SinglePhotoView: View {
               .customTextStyle(fontWeight: .semibold, fontColor: .white)
             
             Spacer()
+            
+            if let url = URL(string: photo.urls.regular) {
+              ShareLink("",
+                        item: url,
+                        subject: Text("Photo by \(photo.user.name)"),
+                        message: Text(vm.photoDetails?.altDescription ?? "")
+              )
+              .tint(Color.white)
+            }
           }
           
           Spacer()
