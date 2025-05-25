@@ -11,9 +11,11 @@ import Foundation
 @Observable
 final class ProfileViewModel {
   var donwloadHistory: [DownloadHistoryModel] = []
-  var likedPhotos: [Int] = []
+  var likedPhotos: [PhotoResponseModel] = []
+  
   init() {
     loadDownloadHistory()
+    loadLikedPhotosFromStorage()
   }
   
   private func loadDownloadHistory() {
@@ -27,6 +29,13 @@ final class ProfileViewModel {
   func clearDownloadHistory() {
     UserDefaults.standard.removeObject(forKey: "downloadHistory")
     donwloadHistory = []
+  }
+  
+  func loadLikedPhotosFromStorage() {
+    if let data = UserDefaults.standard.data(forKey: "likedPhotos"),
+       let decoded = try? JSONDecoder().decode([PhotoResponseModel].self, from: data) {
+      likedPhotos = decoded
+    }
   }
 }
 
