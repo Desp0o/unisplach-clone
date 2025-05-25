@@ -10,7 +10,8 @@ import SwiftUI
 struct SinglePhotoView: View {
   @Environment(\.dismiss) private var dismiss
   @State private var vm = SingleViewModel()
-  @State private var isSheetVisible = false
+  @State private var isSheetVisible: Bool = false
+  @State private var isPhotoLiked: Bool = false
   @Binding var selectedPhoto: PhotoResponseModel?
   let photo: PhotoResponseModel
   
@@ -72,11 +73,14 @@ struct SinglePhotoView: View {
           
           VStack(spacing: 10) {
             Button {
-              
+              vm.likePhoto(photo: photo, isLiked: isPhotoLiked)
+              isPhotoLiked.toggle()
             } label: {
               ZStack {
-                Image(systemName: IconsEnum.heart.rawValue)
-                  .foregroundStyle(.black)
+                Image(systemName: isPhotoLiked ? IconsEnum.heartFilled.rawValue : IconsEnum.heart.rawValue)
+                  .renderingMode(.template)
+                  .imageCustomSettings(width: 18, height: 18)
+                  .foregroundStyle(isPhotoLiked ? .red : .black)
               }
               .frame(width: 50, height: 50)
               .background(.white)
@@ -108,6 +112,11 @@ struct SinglePhotoView: View {
     .sheet(isPresented: $isSheetVisible) {
       if let detail = vm.photoDetails {
         PhotoDetails(details: detail)
+      }
+    }
+    .onAppear {
+      if vm.likedPhotos.contains(photo) {
+        isPhotoLiked = true
       }
     }
     .task {

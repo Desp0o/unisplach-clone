@@ -6,6 +6,7 @@
 //
 
 import Observation
+import Foundation
 
 @MainActor
 @Observable
@@ -13,6 +14,7 @@ final class SingleViewModel {
   private let networkManager: NetworkManagerProtocol
   private let photoSaverManager: PhotoSaverManager
   var photoDetails: SinglePhotoDetailsModel? = nil
+  var likedPhotos: Set<PhotoResponseModel> = []
   var message: String = ""
   var isError: Bool = false
   var isSuccess: Bool = false
@@ -24,6 +26,8 @@ final class SingleViewModel {
   ) {
     self.networkManager = networkManager
     self.photoSaverManager = photoSaverManager
+    
+    loadLikedPhotosFromStorage()
   }
   
   func savePhoto(url: String) {
@@ -57,6 +61,28 @@ final class SingleViewModel {
       }
     }
   }
+  
+  
+  func likePhoto(photo: PhotoResponseModel, isLiked: Bool) {
+    if isLiked {
+      likedPhotos.remove(photo)
+      saveLikedPhotoInStorage()
+    } else {
+      likedPhotos.insert(photo)
+      saveLikedPhotoInStorage()
+    }
+  }
+  
+  func saveLikedPhotoInStorage() {
+    if let encoded = try? JSONEncoder().encode(likedPhotos) {
+      UserDefaults.standard.set(encoded, forKey: "likedPhotos")
+    }
+  }
+  
+  func loadLikedPhotosFromStorage() {
+    if let data = UserDefaults.standard.data(forKey: "likedPhotos"),
+       let decoded = try? JSONDecoder().decode([PhotoResponseModel].self, from: data) {
+      likedPhotos = Set(decoded)
+    }
+  }
 }
-
-
