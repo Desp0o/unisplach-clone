@@ -74,18 +74,22 @@ struct SinglePhotoView: View {
           VStack(spacing: 10) {
             Button {
               vm.likePhoto(photo: photo, isLiked: isPhotoLiked)
-              isPhotoLiked.toggle()
+              
+              withAnimation(.snappy(duration: 0.2)) {
+                isPhotoLiked.toggle()
+              }
             } label: {
               ZStack {
                 Image(systemName: isPhotoLiked ? IconsEnum.heartFilled.rawValue : IconsEnum.heart.rawValue)
                   .renderingMode(.template)
-                  .imageCustomSettings(width: 18, height: 18)
+                  .imageCustomSettings(width: 24, height: 24)
                   .foregroundStyle(isPhotoLiked ? .red : .black)
               }
               .frame(width: 50, height: 50)
               .background(.white)
               .clipShape(Circle())
             }
+            .buttonStyle(PlainButtonStyle())
             
             Button {
               vm.savePhoto(url: photo.urls.regular)
