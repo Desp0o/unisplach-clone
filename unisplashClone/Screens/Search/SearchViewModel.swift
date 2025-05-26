@@ -23,14 +23,14 @@ final class SearchViewModel: BaseViewModel {
   
   var order: SearchOrder = .relevant {
     didSet {
-      guard !query.isEmpty else { return }
+      guard !searchedPhotos.isEmpty else { return }
       searchedPhotos = []
       performSearch()
     }
   }
   var orientation: SearchOrientation = .all {
     didSet {
-      guard !query.isEmpty else { return }
+      guard !searchedPhotos.isEmpty else { return }
       searchedPhotos = []
       performSearch()
     }
