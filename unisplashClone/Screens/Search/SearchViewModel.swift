@@ -17,6 +17,7 @@ final class SearchViewModel: BaseViewModel {
   var searchedPhotos: [PhotoResponseModel] = []
   var searchHistory: [HistoryModel] = []
   var searchResultQuantity: Int = 0
+  var isResultatEmpty: Bool = false
   var isLoading: Bool = false
   var query: String = ""
   
@@ -94,7 +95,12 @@ final class SearchViewModel: BaseViewModel {
         
         searchedPhotos.append(contentsOf: response.results)
         searchResultQuantity = response.total
-        print(searchedPhotos.count)
+        
+        if response.total == 0 {
+          isResultatEmpty = true
+        } else {
+          isResultatEmpty = false
+        }
       } catch {
         print(error.localizedDescription)
       }
