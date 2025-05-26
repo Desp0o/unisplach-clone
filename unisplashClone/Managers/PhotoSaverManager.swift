@@ -10,9 +10,14 @@ import UIKit
 
 final class PhotoSaverManager {
   private let networkManager: ImageNetworkProtocol
+  private let userDefaultManager: UserDefaultsManager
   
-  init(networkManager: ImageNetworkProtocol = NetworkManager()) {
+  init(
+    networkManager: ImageNetworkProtocol = NetworkManager(),
+    userDefaultManager: UserDefaultsManager = UserDefaultsManager()
+  ) {
     self.networkManager = networkManager
+    self.userDefaultManager = userDefaultManager
   }
   
   private func checkPermission() async -> Bool {
@@ -26,9 +31,8 @@ final class PhotoSaverManager {
     }
     
     var currentHistory: [DownloadHistoryModel] = []
-    if let savedData = UserDefaults.standard.data(forKey: "downloadHistory"),
-       let decoded = try? JSONDecoder().decode([DownloadHistoryModel].self, from: savedData) {
-      currentHistory = decoded
+    if let data: [DownloadHistoryModel]? = userDefaultManager.load(for: UserDefaultsKeys.downloadHistory.rawValue) {
+      currentHistory = data ?? []
     }
     
     for url in urls {
@@ -42,9 +46,7 @@ final class PhotoSaverManager {
         let newData = DownloadHistoryModel(id: UUID().uuidString, url: url)
         currentHistory.append(newData)
         
-        if let encoded = try? JSONEncoder().encode(currentHistory) {
-          UserDefaults.standard.set(encoded, forKey: "downloadHistory")
-        }
+        userDefaultManager.set(value: currentHistory, for: UserDefaultsKeys.downloadHistory.rawValue)
       } catch {
         throw PhotoSaverErrorEnum.downloadFailed
       }

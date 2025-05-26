@@ -26,8 +26,7 @@ struct CachedAsyncImage: View {
           .frame(maxWidth: .infinity, maxHeight: .infinity)
       } else {
         if let url = url {
-          ProgressView()
-            .frame(height: 150)
+          ShimmerEffect()
             .task {
               await loadImage(from: url)
             }

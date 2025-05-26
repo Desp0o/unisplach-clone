@@ -22,7 +22,7 @@ struct SinglePhotoView: View {
         .frame(maxWidth: .infinity)
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
-    .background(.customBlack)
+    .background(.customDark)
     .overlay {
       VStack {
         HStack {
@@ -31,7 +31,7 @@ struct SinglePhotoView: View {
           } label: {
             Image(systemName: IconsEnum.baclButton.rawValue)
               .imageCustomSettings(width: 18, height: 18)
-              .foregroundStyle(.white)
+              .foregroundStyle(Color.primary)
           }
           
           Spacer()
@@ -44,7 +44,7 @@ struct SinglePhotoView: View {
             )
           
           Text(photo.user.name)
-            .customTextStyle(fontWeight: .semibold, fontColor: .white)
+            .customTextStyle(fontWeight: .semibold, fontColor: Color.primary)
           
           Spacer()
           
@@ -54,7 +54,7 @@ struct SinglePhotoView: View {
                       subject: Text("Photo by \(photo.user.name)"),
                       message: Text(vm.photoDetails?.altDescription ?? "")
             )
-            .tint(Color.white)
+            .tint(Color.primary)
           }
         }
         
@@ -63,7 +63,7 @@ struct SinglePhotoView: View {
         HStack(alignment: .bottom) {
           Image(systemName: IconsEnum.info.rawValue)
             .imageCustomSettings()
-            .foregroundStyle(.white)
+            .foregroundStyle(Color.primary)
             .frame(width: 24, height: 24)
             .onTapGesture {
               isSheetVisible = true
@@ -83,10 +83,10 @@ struct SinglePhotoView: View {
                 Image(systemName: isPhotoLiked ? IconsEnum.heartFilled.rawValue : IconsEnum.heart.rawValue)
                   .renderingMode(.template)
                   .imageCustomSettings(width: 24, height: 24)
-                  .foregroundStyle(isPhotoLiked ? .red : .black)
+                  .foregroundStyle(isPhotoLiked ? .red : .customDark)
               }
               .frame(width: 50, height: 50)
-              .background(.white)
+              .background(.customWhite)
               .clipShape(Circle())
             }
             .buttonStyle(PlainButtonStyle())
@@ -96,10 +96,10 @@ struct SinglePhotoView: View {
             } label: {
               ZStack {
                 Image(systemName: IconsEnum.arrowDown.rawValue)
-                  .foregroundStyle(.black)
+                  .foregroundStyle(.customDark)
               }
               .frame(width: 50, height: 50)
-              .background(.white)
+              .background(.customWhite)
               .clipShape(Circle())
             }
           }

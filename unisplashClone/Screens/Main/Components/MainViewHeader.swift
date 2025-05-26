@@ -17,7 +17,7 @@ struct MainViewHeader: View {
       
       Spacer()
       
-      Text("Unisplash")
+      Text("Unsplash")
         .customTextStyle(fontSize: 20, fontWeight: .bold)
       
       Spacer()

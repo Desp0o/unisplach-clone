@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E34C89282DE4F53700D5581B /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E34C89272DE4F53700D5581B /* Launch Screen.storyboard */; };
 		E38C6DBD2DE0D9CD000B5D5A /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = E38C6DBC2DE0D9CD000B5D5A /* Alamofire */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E34C89272DE4F53700D5581B /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		E38C6D8A2DE0C41D000B5D5A /* unisplashClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = unisplashClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E38C6D972DE0C41E000B5D5A /* unisplashCloneTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = unisplashCloneTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E38C6DA12DE0C41E000B5D5A /* unisplashCloneUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = unisplashCloneUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -80,6 +82,7 @@
 		E38C6D812DE0C41D000B5D5A = {
 			isa = PBXGroup;
 			children = (
+				E34C89272DE4F53700D5581B /* Launch Screen.storyboard */,
 				E38C6D8C2DE0C41D000B5D5A /* unisplashClone */,
 				E38C6D9A2DE0C41E000B5D5A /* unisplashCloneTests */,
 				E38C6DA42DE0C41E000B5D5A /* unisplashCloneUITests */,
@@ -221,6 +224,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E34C89282DE4F53700D5581B /* Launch Screen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -413,6 +417,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
@@ -443,6 +448,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;

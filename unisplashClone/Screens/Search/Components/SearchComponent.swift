@@ -22,6 +22,7 @@ struct SearchComponent: View {
           .focused($isSearchFocused)
           .onSubmit {
             if !vm.query.isEmpty {
+              vm.searchedPhotos.removeAll()
               vm.saveHistory()
               vm.performSearch()
               isSearchFocused = false
@@ -65,5 +66,5 @@ struct SearchComponent: View {
 }
 
 #Preview {
-  SearchComponent(vm: SearchViewModel())
+  SearchComponent(vm: SearchViewModel(userDefaultManager: UserDefaultsManager()))
 }

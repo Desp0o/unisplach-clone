@@ -12,6 +12,7 @@ struct ProfileView: View {
   @State private var vm = ProfileViewModel()
   @State private var historyView: Int = 0
   @State private var isSettingsVisible: Bool = false
+  @Environment(\.colorScheme) private var systemColorScheme
   
   var body: some View {
     VStack(spacing: 0) {
@@ -38,13 +39,15 @@ struct ProfileView: View {
       Group {
         if historyView == 1 {
           VStack(alignment: .leading, spacing: 10) {
-            Button {
-              vm.clearDownloadHistory()
-            } label: {
-              Text("Clear download")
-                .customTextStyle(fontColor: .customGray)
+            if !vm.donwloadHistory.isEmpty {
+              Button {
+                vm.clearDownloadHistory()
+              } label: {
+                Text("Clear download")
+                  .customTextStyle(fontColor: .customGray)
+              }
+              .offset(x: 20)
             }
-            .offset(y: 20)
             
             DownloadHistoryView(vm: vm)
           }
@@ -81,7 +84,8 @@ struct ProfileView: View {
       .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
       .padding()
       .presentationDetents([.fraction(0.2)])
-      .preferredColorScheme(AppTheme(rawValue: selectedTheme)?.colorScheme)
+      .preferredColorScheme(AppTheme(rawValue: selectedTheme)?.colorScheme != nil ?
+                            AppTheme(rawValue: selectedTheme)?.colorScheme : systemColorScheme)
     }
   }
 }
