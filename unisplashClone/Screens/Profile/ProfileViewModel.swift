@@ -6,7 +6,6 @@
 //
 
 import Observation
-import Foundation
 
 @Observable
 final class ProfileViewModel {
@@ -35,25 +34,6 @@ final class ProfileViewModel {
   func loadLikedPhotosFromStorage() {
     if let data: [PhotoResponseModel]? = userDefaultManager.load(for: UserDefaultsKeys.likedPhotos.rawValue) {
       likedPhotos = data ?? []
-    }
-  }
-}
-
-class UserDefaultsManager {
-  func load<T: Decodable>(for key: String) -> T? {
-    if let data = UserDefaults.standard.data(forKey: key) {
-      return try? JSONDecoder().decode(T.self, from: data)
-    }
-    return nil
-  }
-  
-  func clear(for key: String) {
-    UserDefaults.standard.removeObject(forKey: key)
-  }
-  
-  func set<T: Encodable>(value: T, for key: String) {
-    if let encoded = try? JSONEncoder().encode(value) {
-      UserDefaults.standard.set(encoded, forKey: key)
     }
   }
 }

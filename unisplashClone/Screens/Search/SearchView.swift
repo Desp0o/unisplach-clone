@@ -35,60 +35,62 @@ struct SearchView: View {
       }
       
       if !vm.isLoading {
-        ScrollView {
-          if vm.searchedPhotos.isEmpty && !vm.isResultatEmpty {
-            SearchHistoryComponent(vm: vm)
-          } else {
-            VStack {
-              if vm.isResultatEmpty {
-                Text("No photos found!")
-                  .customTextStyle(fontColor: .customGray)
-                  .offset(y: 40)
-              } else {
-                LazyVGrid(columns: [GridItem(), GridItem()], spacing: 4) {
-                  ForEach(vm.searchedPhotos, id: \.id) { photo in
-                    let isSelected = vm.selectedPhotos.contains(photo.urls.small)
-                    
-                    CachedAsyncImage(url: URL(string: photo.urls.small))
-                      .scaledToFill()
-                      .frame(width: UIScreen.main.bounds.width / 2, height: 150)
-                      .contentShape(Rectangle())
-                      .clipped()
-                      .onTapGesture {
-                        withAnimation(.snappy(duration: 0.1)) {
-                          if vm.isLongPressed {
-                            if isSelected {
-                              vm.selectedPhotos.remove(photo.urls.small)
+        GeometryReader { geometry in
+          ScrollView {
+            if vm.searchedPhotos.isEmpty && !vm.isResultatEmpty {
+              SearchHistoryComponent(vm: vm)
+            } else {
+              VStack {
+                if vm.isResultatEmpty {
+                  Text("No photos found!")
+                    .customTextStyle(fontColor: .customGray)
+                    .offset(y: 40)
+                } else {
+                  LazyVGrid(columns: [GridItem(), GridItem()], spacing: 4) {
+                    ForEach(vm.searchedPhotos, id: \.id) { photo in
+                      let isSelected = vm.selectedPhotos.contains(photo.urls.small)
+                      
+                      CachedAsyncImage(url: URL(string: photo.urls.small))
+                        .scaledToFill()
+                        .frame(width: geometry.size.width / 2, height: 150)
+                        .contentShape(Rectangle())
+                        .clipped()
+                        .onTapGesture {
+                          withAnimation(.snappy(duration: 0.1)) {
+                            if vm.isLongPressed {
+                              if isSelected {
+                                vm.selectedPhotos.remove(photo.urls.small)
+                              } else {
+                                vm.selectedPhotos.insert(photo.urls.small)
+                              }
                             } else {
-                              vm.selectedPhotos.insert(photo.urls.small)
+                              selectedPhoto = photo
                             }
-                          } else {
-                            selectedPhoto = photo
                           }
                         }
-                      }
-                      .onLongPressGesture {
-                        withAnimation {
-                          vm.isLongPressed = true
+                        .onLongPressGesture {
+                          withAnimation {
+                            vm.isLongPressed = true
+                          }
                         }
-                      }
-                      .overlay(alignment: .topTrailing) {
-                        SelectedMark(
-                          isLongPressed: vm.isLongPressed,
-                          isSelected: isSelected
-                        )
-                      }
-                      .task {
-                        vm.infinityScroll(id: photo.id)
-                      }
+                        .overlay(alignment: .topTrailing) {
+                          SelectedMark(
+                            isLongPressed: vm.isLongPressed,
+                            isSelected: isSelected
+                          )
+                        }
+                        .task {
+                          vm.infinityScroll(id: photo.id)
+                        }
+                    }
                   }
                 }
               }
             }
           }
+          .scrollIndicators(.hidden)
+          .scrollBounceBehavior(.basedOnSize)
         }
-        .scrollIndicators(.hidden)
-        .scrollBounceBehavior(.basedOnSize)
       }
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
