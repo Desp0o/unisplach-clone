@@ -38,13 +38,15 @@ struct ProfileView: View {
       Group {
         if historyView == 1 {
           VStack(alignment: .leading, spacing: 10) {
-            Button {
-              vm.clearDownloadHistory()
-            } label: {
-              Text("Clear download")
-                .customTextStyle(fontColor: .customGray)
+            if !vm.donwloadHistory.isEmpty {
+              Button {
+                vm.clearDownloadHistory()
+              } label: {
+                Text("Clear download")
+                  .customTextStyle(fontColor: .customGray)
+              }
+              .offset(x: 20)
             }
-            .offset(y: 20)
             
             DownloadHistoryView(vm: vm)
           }

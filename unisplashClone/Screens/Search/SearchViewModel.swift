@@ -14,6 +14,7 @@ import SwiftUI
 final class SearchViewModel: BaseViewModel {
   private let networkManager: NetworkManagerProtocol
   private let photoSaverManager: PhotoSaverManager
+  private let userDefaultManager: UserDefaultsManager
   var searchedPhotos: [PhotoResponseModel] = []
   var searchHistory: [HistoryModel] = []
   var searchResultQuantity: Int = 0
@@ -38,10 +39,12 @@ final class SearchViewModel: BaseViewModel {
   
   init(
     networkManager: NetworkManagerProtocol = NetworkManager(),
-    photoSaverManager: PhotoSaverManager = PhotoSaverManager()
+    photoSaverManager: PhotoSaverManager = PhotoSaverManager(),
+    userDefaultManager: UserDefaultsManager = UserDefaultsManager()
   ) {
     self.networkManager = networkManager
     self.photoSaverManager = photoSaverManager
+    self.userDefaultManager = userDefaultManager
     super.init()
     
     loadHistory()
@@ -51,30 +54,24 @@ final class SearchViewModel: BaseViewModel {
     let history = HistoryModel(id: UUID().uuidString, keyword: query)
     
     searchHistory.insert(history, at: 0)
-    if let encoded = try? JSONEncoder().encode(searchHistory) {
-      UserDefaults.standard.set(encoded, forKey: "searchHistory")
-    }
+    userDefaultManager.set(value: searchHistory, for: UserDefaultsKeys.searchHistory.rawValue)
   }
   
   func clearSearchHistory() {
-    UserDefaults.standard.removeObject(forKey: "searchHistory")
+    userDefaultManager.clear(for: UserDefaultsKeys.searchHistory.rawValue)
     searchHistory = []
   }
   
   func removeSingleItemFromHistory(id: String) {
     if let index = searchHistory.firstIndex(where: { $0.id == id }) {
       searchHistory.remove(at: index)
-      
-      if let encoded = try? JSONEncoder().encode(searchHistory) {
-        UserDefaults.standard.set(encoded, forKey: "searchHistory")
-      }
+      userDefaultManager.set(value: searchHistory, for: UserDefaultsKeys.searchHistory.rawValue)
     }
   }
   
   private func loadHistory() {
-    if let data = UserDefaults.standard.data(forKey: "searchHistory"),
-       let decoded = try? JSONDecoder().decode([HistoryModel].self, from: data) {
-      searchHistory = decoded
+    if let data : [HistoryModel]? = userDefaultManager.load(for: UserDefaultsKeys.searchHistory.rawValue) {
+      searchHistory = data ?? []
     }
   }
   

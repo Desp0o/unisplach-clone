@@ -10,33 +10,50 @@ import Foundation
 
 @Observable
 final class ProfileViewModel {
+  private let userDefaultManager: UserDefaultsManager
   var donwloadHistory: [DownloadHistoryModel] = []
   var likedPhotos: [PhotoResponseModel] = []
   
-  init() {
+  init(userDefaultManager: UserDefaultsManager = UserDefaultsManager()) {
+    self.userDefaultManager = userDefaultManager
+    
     loadDownloadHistory()
     loadLikedPhotosFromStorage()
   }
   
   func loadDownloadHistory() {
-    if let data = UserDefaults.standard.data(forKey: "downloadHistory") {
-      if let decoded = try? JSONDecoder().decode([DownloadHistoryModel].self, from: data) {
-        donwloadHistory = decoded
-      }
+    if let data: [DownloadHistoryModel]? = userDefaultManager.load(for: UserDefaultsKeys.downloadHistory.rawValue) {
+      donwloadHistory = data ?? []
     }
   }
   
   func clearDownloadHistory() {
-    UserDefaults.standard.removeObject(forKey: "downloadHistory")
+    userDefaultManager.clear(for: UserDefaultsKeys.downloadHistory.rawValue)
     donwloadHistory = []
   }
   
   func loadLikedPhotosFromStorage() {
-    if let data = UserDefaults.standard.data(forKey: "likedPhotos"),
-       let decoded = try? JSONDecoder().decode([PhotoResponseModel].self, from: data) {
-      likedPhotos = decoded
+    if let data: [PhotoResponseModel]? = userDefaultManager.load(for: UserDefaultsKeys.likedPhotos.rawValue) {
+      likedPhotos = data ?? []
     }
   }
 }
 
-
+class UserDefaultsManager {
+  func load<T: Decodable>(for key: String) -> T? {
+    if let data = UserDefaults.standard.data(forKey: key) {
+      return try? JSONDecoder().decode(T.self, from: data)
+    }
+    return nil
+  }
+  
+  func clear(for key: String) {
+    UserDefaults.standard.removeObject(forKey: key)
+  }
+  
+  func set<T: Encodable>(value: T, for key: String) {
+    if let encoded = try? JSONEncoder().encode(value) {
+      UserDefaults.standard.set(encoded, forKey: key)
+    }
+  }
+}

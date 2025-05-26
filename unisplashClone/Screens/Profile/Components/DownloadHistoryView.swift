@@ -11,30 +11,32 @@ struct DownloadHistoryView: View {
   let vm: ProfileViewModel
   
   var body: some View {
-    if vm.donwloadHistory.isEmpty {
-      Text("No downloads yet")
-        .customTextStyle(fontColor: .customGray)
-        .offset(y: 40)
-    } else {
-      GeometryReader { geometry in
-        let photoWidth = geometry.size.width / 4 - 2
-
-        ScrollView {
-          LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 4), spacing: 2) {
-            ForEach(vm.donwloadHistory, id: \.id) { photo in
-              CachedAsyncImage(url: URL(string: photo.url))
-                .scaledToFill()
-                .frame(width: photoWidth, height: photoWidth)
-                .clipped()
+    VStack {
+      if vm.donwloadHistory.isEmpty {
+        Text("No downloads yet")
+          .customTextStyle(fontColor: .customGray)
+          .offset(y: 40)
+      } else {
+        GeometryReader { geometry in
+          let photoWidth = geometry.size.width / 4 - 2
+          
+          ScrollView {
+            LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 4), spacing: 2) {
+              ForEach(vm.donwloadHistory, id: \.id) { photo in
+                CachedAsyncImage(url: URL(string: photo.url))
+                  .scaledToFill()
+                  .frame(width: photoWidth, height: photoWidth)
+                  .clipped()
+              }
             }
           }
         }
+        .scrollBounceBehavior(.basedOnSize)
+        .scrollIndicators(.hidden)
       }
-      .scrollBounceBehavior(.basedOnSize)
-      .scrollIndicators(.hidden)
-      .onAppear {
-        vm.loadDownloadHistory()
-      }
+    }
+    .onAppear {
+      vm.loadDownloadHistory()
     }
   }
 }

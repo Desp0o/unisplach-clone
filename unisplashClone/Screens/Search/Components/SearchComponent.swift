@@ -65,5 +65,5 @@ struct SearchComponent: View {
 }
 
 #Preview {
-  SearchComponent(vm: SearchViewModel())
+  SearchComponent(vm: SearchViewModel(userDefaultManager: UserDefaultsManager()))
 }
