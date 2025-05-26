@@ -18,7 +18,7 @@ final class ProfileViewModel {
     loadLikedPhotosFromStorage()
   }
   
-  private func loadDownloadHistory() {
+  func loadDownloadHistory() {
     if let data = UserDefaults.standard.data(forKey: "downloadHistory") {
       if let decoded = try? JSONDecoder().decode([DownloadHistoryModel].self, from: data) {
         donwloadHistory = decoded

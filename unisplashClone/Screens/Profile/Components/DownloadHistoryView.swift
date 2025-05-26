@@ -32,6 +32,9 @@ struct DownloadHistoryView: View {
       }
       .scrollBounceBehavior(.basedOnSize)
       .scrollIndicators(.hidden)
+      .onAppear {
+        vm.loadDownloadHistory()
+      }
     }
   }
 }

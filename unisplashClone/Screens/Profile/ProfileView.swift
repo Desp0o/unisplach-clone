@@ -35,11 +35,24 @@ struct ProfileView: View {
       .pickerStyle(.segmented)
       .padding()
       
-      if historyView == 1 {
-        DownloadHistoryView(vm: vm)
-      } else {
-        LikedPhotosView(vm: vm)
+      Group {
+        if historyView == 1 {
+          VStack(alignment: .leading, spacing: 10) {
+            Button {
+              vm.clearDownloadHistory()
+            } label: {
+              Text("Clear download")
+                .customTextStyle(fontColor: .customGray)
+            }
+            .offset(y: 20)
+            
+            DownloadHistoryView(vm: vm)
+          }
+        } else {
+          LikedPhotosView(vm: vm)
+        }
       }
+      .padding(.bottom, 50)
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
     .background(.customDark)
@@ -47,7 +60,7 @@ struct ProfileView: View {
       Button {
         isSettingsVisible.toggle()
       } label: {
-        Image(systemName: "gear")
+        Image(systemName: IconsEnum.gear.rawValue)
           .imageCustomSettings()
           .foregroundStyle(Color.primary)
       }
@@ -67,7 +80,6 @@ struct ProfileView: View {
       }
       .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
       .padding()
-      .background(.customDark)
       .presentationDetents([.fraction(0.2)])
       .preferredColorScheme(AppTheme(rawValue: selectedTheme)?.colorScheme)
     }
