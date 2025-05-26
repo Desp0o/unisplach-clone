@@ -9,15 +9,26 @@ import SwiftUI
 
 struct LoadingIndicator: View {
   let isLoading: Bool
+  @State private var isRotating = false
   
   var body: some View {
     if isLoading {
       VStack {
-        ProgressView()
+        Image(systemName: IconsEnum.loadingIcon.rawValue)
+          .renderingMode(.template)
+          .rotationEffect(.degrees(isRotating ? 360 : 0))
           .scaleEffect(2)
-          .tint(Color.primary)
+          .foregroundStyle(Color.primary)
       }
       .frame(maxWidth: .infinity, maxHeight: .infinity)
+      .onAppear {
+        withAnimation(.linear(duration: 1).repeatForever(autoreverses: false)) {
+          isRotating = true
+        }
+      }
+      .onDisappear {
+        isRotating = false
+      }
     }
   }
 }
