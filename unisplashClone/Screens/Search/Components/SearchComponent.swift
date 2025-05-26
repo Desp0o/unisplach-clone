@@ -22,6 +22,7 @@ struct SearchComponent: View {
           .focused($isSearchFocused)
           .onSubmit {
             if !vm.query.isEmpty {
+              vm.searchedPhotos.removeAll()
               vm.saveHistory()
               vm.performSearch()
               isSearchFocused = false
