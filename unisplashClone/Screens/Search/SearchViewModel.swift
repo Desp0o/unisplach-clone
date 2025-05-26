@@ -82,10 +82,8 @@ final class SearchViewModel: BaseViewModel {
     if searchedPhotos.isEmpty {
       isLoading = true
     }
-    var api = "https://api.unsplash.com/search/photos?query=\(query)&page=\(page)&per_page=20&client_id=akXKH70mCBd9NsLvhnZEVwz8wVN0urhfmB2fKi7_ouU&order_by=\(order)"
-    if orientation != .all {
-      api += "&orientation=\(orientation.rawValue)"
-    }
+    
+    let api = APIEndpoinstEnum.searchWithFilter(query: query, page: page, order: order, orientation: orientation)
     
     Task {
       defer {
@@ -93,7 +91,7 @@ final class SearchViewModel: BaseViewModel {
       }
       
       do {
-        let response: SearchedDataModel = try await networkManager.networkCall(api: api)
+        let response: SearchedDataModel = try await networkManager.networkCall(api: api.url)
         
         searchedPhotos.append(contentsOf: response.results)
         searchResultQuantity = response.total
