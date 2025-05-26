@@ -11,7 +11,7 @@ enum IconsEnum: String {
   case photo //sf
   case arrowDown = "arrow.down" //sf
   case heart //sf
-  case heartFill = "heart.fill" //sf
+  case heartFilled = "heart.fill" //sf
   case sun = "sun.max" //sf
   case moon //sf
   case squareGrid = "square.grid.2x2" //sf
@@ -20,7 +20,8 @@ enum IconsEnum: String {
   case checkmarkCircle = "checkmark.circle.fill" //sf
   case info = "info.circle" //sf
   case baclButton = "chevron.left" //sf
+  case gear // sf
   case logo
-  
+  case avatar
 }
 

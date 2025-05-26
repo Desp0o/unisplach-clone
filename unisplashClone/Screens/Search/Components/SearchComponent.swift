@@ -36,6 +36,7 @@ struct SearchComponent: View {
       if !vm.query.isEmpty {
         Button {
           vm.query = ""
+          vm.isResultatEmpty = false
         } label: {
           Text("Cancel")
             .customTextStyle(fontColor: .customGray)
