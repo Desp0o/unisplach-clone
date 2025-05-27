@@ -60,6 +60,7 @@ final class SingleViewModel {
         let response: SinglePhotoDetailsModel = try await networkManager.networkCall(api: api)
         photoDetails = response
       } catch {
+        message = "Can't load photo details"
         isError = true
         print(error)
       }
