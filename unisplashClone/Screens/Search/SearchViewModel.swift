@@ -99,6 +99,8 @@ final class SearchViewModel: BaseViewModel {
           isResultatEmpty = false
         }
       } catch {
+        message = "Something went wring"
+        isError = true
         print(error.localizedDescription)
       }
     }

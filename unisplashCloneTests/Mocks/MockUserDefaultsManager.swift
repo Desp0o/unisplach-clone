@@ -24,8 +24,10 @@ class MockUserDefaultsManager: UserDefaultsManager {
   }
   
   override func set<T: Encodable>(value: T, for key: String) {
-    if let encoded = try? JSONEncoder().encode(value) {
-      storage[key] = encoded
+    if !shouldReturnError {
+      if let encoded = try? JSONEncoder().encode(value) {
+        storage[key] = encoded
+      }
     }
   }
 }
