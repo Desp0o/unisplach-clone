@@ -22,7 +22,7 @@ struct LikedPhotosView: View {
         
         ScrollView {
           LazyVGrid(columns: Array(repeating: GridItem(), count: 4), spacing: 4) {
-            ForEach(vm.likedPhotos, id: \.id) { photo in
+            ForEach(vm.likedPhotos.reversed(), id: \.id) { photo in
               CachedAsyncImage(url: URL(string: photo.urls.smallS3))
                 .scaledToFill()
                 .frame(width: photoSize, height: photoSize)

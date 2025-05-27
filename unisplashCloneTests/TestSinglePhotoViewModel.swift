@@ -112,7 +112,7 @@ final class TestSinglePhotoViewModel: XCTestCase {
   
   func test_loadLikedPhotosFromStorage() {
     let photo = PhotoResponseModel(id: "2", urls: PhotoURLsModel(regular: "", small: "", thumb: "", smallS3: ""), user: UserModel(id: "", name: "", profileImage: ProfileImageModel(small: "", medium: "", large: "")))
-    let photoSet: Set<PhotoResponseModel> = [photo]
+    let photoSet: [PhotoResponseModel] = [photo]
     mockUserDefaultManager.set(value: photoSet, for: UserDefaultsKeys.likedPhotos.rawValue)
     
     sut.loadLikedPhotosFromStorage()
@@ -150,7 +150,7 @@ final class TestSinglePhotoViewModel: XCTestCase {
     
     XCTAssertFalse(sut.likedPhotos.contains(photo))
     
-    let savedPhotos: Set<PhotoResponseModel>? = mockUserDefaultManager.load(for: UserDefaultsKeys.likedPhotos.rawValue)
+    let savedPhotos: [PhotoResponseModel]? = mockUserDefaultManager.load(for: UserDefaultsKeys.likedPhotos.rawValue)
     XCTAssertEqual(savedPhotos?.count, 0)
   }
 }

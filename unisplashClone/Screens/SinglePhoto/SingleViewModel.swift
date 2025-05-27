@@ -15,7 +15,7 @@ final class SingleViewModel {
   private let photoSaverManager: PhotoSaverManager
   private let userDefaultManager: UserDefaultsManager
   var photoDetails: SinglePhotoDetailsModel? = nil
-  var likedPhotos: Set<PhotoResponseModel> = []
+  var likedPhotos: [PhotoResponseModel] = []
   var message: String = ""
   var isError: Bool = false
   var isSuccess: Bool = false
@@ -68,21 +68,26 @@ final class SingleViewModel {
   
   
   func likePhoto(photo: PhotoResponseModel, isLiked: Bool) {
-    if isLiked {
-      likedPhotos.remove(photo)
-      saveLikedPhotoInStorage()
-    } else {
-      likedPhotos.insert(photo)
-      saveLikedPhotoInStorage()
-    }
+      if isLiked {
+          if let index = likedPhotos.firstIndex(where: { $0.id == photo.id }) {
+              likedPhotos.remove(at: index)
+              saveLikedPhotoInStorage()
+          }
+      } else {
+          if !likedPhotos.contains(where: { $0.id == photo.id }) {
+              likedPhotos.append(photo)
+              saveLikedPhotoInStorage()
+          }
+      }
   }
+
   
   func saveLikedPhotoInStorage() {
     userDefaultManager.set(value: likedPhotos, for: UserDefaultsKeys.likedPhotos.rawValue)
   }
   
   func loadLikedPhotosFromStorage() {
-    if let data: Set<PhotoResponseModel> = userDefaultManager.load(for: UserDefaultsKeys.likedPhotos.rawValue) {
+    if let data: [PhotoResponseModel] = userDefaultManager.load(for: UserDefaultsKeys.likedPhotos.rawValue) {
       likedPhotos = data
     }
   }
