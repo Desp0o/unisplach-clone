@@ -7,7 +7,13 @@
 
 import Foundation
 
-class UserDefaultsManager {
+protocol UserDefaultsManagerProtocol {
+    func load<T: Decodable>(for key: String) -> T?
+    func clear(for key: String)
+    func set<T: Encodable>(value: T, for key: String)
+}
+
+class UserDefaultsManager: UserDefaultsManagerProtocol {
   func load<T: Decodable>(for key: String) -> T? {
     if let data = UserDefaults.standard.data(forKey: key) {
       return try? JSONDecoder().decode(T.self, from: data)
@@ -25,3 +31,5 @@ class UserDefaultsManager {
     }
   }
 }
+
+
