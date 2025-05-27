@@ -21,8 +21,8 @@ final class ProfileViewModel {
   }
   
   func loadDownloadHistory() {
-    if let data: [DownloadHistoryModel]? = userDefaultManager.load(for: UserDefaultsKeys.downloadHistory.rawValue) {
-      donwloadHistory = data ?? []
+    if let data: [DownloadHistoryModel] = userDefaultManager.load(for: UserDefaultsKeys.downloadHistory.rawValue) {
+      donwloadHistory = data
     }
   }
   
@@ -32,8 +32,8 @@ final class ProfileViewModel {
   }
   
   func loadLikedPhotosFromStorage() {
-    if let data: [PhotoResponseModel]? = userDefaultManager.load(for: UserDefaultsKeys.likedPhotos.rawValue) {
-      likedPhotos = data ?? []
+    if let data: [PhotoResponseModel] = userDefaultManager.load(for: UserDefaultsKeys.likedPhotos.rawValue) {
+      likedPhotos = data
     }
   }
 }

@@ -8,19 +8,22 @@
 import Foundation
 @testable import unisplashClone
 
-class MockUserDefaultsManager: UserDefaultsManagerProtocol {
+class MockUserDefaultsManager: UserDefaultsManager {
   private var storage: [String: Data] = [:]
+  var shouldReturnError: Bool = false
   
-  func load<T: Decodable>(for key: String) -> T? {
-    guard let data = storage[key] else { return nil }
-    return try? JSONDecoder().decode(T.self, from: data)
+  override func load<T: Decodable>(for key: String) -> T? {
+    if !shouldReturnError {
+      guard let data = storage[key] else { return nil }
+      return try? JSONDecoder().decode(T.self, from: data)
+    } else {return nil }
   }
   
-  func clear(for key: String) {
+  override func clear(for key: String) {
     storage.removeValue(forKey: key)
   }
   
-  func set<T: Encodable>(value: T, for key: String) {
+  override func set<T: Encodable>(value: T, for key: String) {
     if let encoded = try? JSONEncoder().encode(value) {
       storage[key] = encoded
     }
