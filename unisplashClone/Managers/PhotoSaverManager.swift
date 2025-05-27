@@ -12,7 +12,7 @@ protocol PhotoSaverManagerProtocol {
     func downloadAndSaveImages(urls: [String]) async throws
 }
 
-final class PhotoSaverManager: PhotoSaverManagerProtocol {
+class PhotoSaverManager: PhotoSaverManagerProtocol {
   private let networkManager: ImageNetworkProtocol
   private let userDefaultManager: UserDefaultsManager
   
