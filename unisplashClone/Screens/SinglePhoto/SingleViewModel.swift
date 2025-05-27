@@ -13,6 +13,7 @@ import Foundation
 final class SingleViewModel {
   private let networkManager: NetworkManagerProtocol
   private let photoSaverManager: PhotoSaverManager
+  private let userDefaultManager: UserDefaultsManager
   var photoDetails: SinglePhotoDetailsModel? = nil
   var likedPhotos: Set<PhotoResponseModel> = []
   var message: String = ""
@@ -22,10 +23,12 @@ final class SingleViewModel {
   
   init(
     networkManager: NetworkManagerProtocol = NetworkManager(),
-    photoSaverManager: PhotoSaverManager = PhotoSaverManager()
+    photoSaverManager: PhotoSaverManager = PhotoSaverManager(),
+    userDefaultManager: UserDefaultsManager = UserDefaultsManager()
   ) {
     self.networkManager = networkManager
     self.photoSaverManager = photoSaverManager
+    self.userDefaultManager = userDefaultManager
     
     loadLikedPhotosFromStorage()
   }
@@ -57,6 +60,7 @@ final class SingleViewModel {
         let response: SinglePhotoDetailsModel = try await networkManager.networkCall(api: api)
         photoDetails = response
       } catch {
+        isError = true
         print(error)
       }
     }
@@ -74,15 +78,12 @@ final class SingleViewModel {
   }
   
   func saveLikedPhotoInStorage() {
-    if let encoded = try? JSONEncoder().encode(likedPhotos) {
-      UserDefaults.standard.set(encoded, forKey: "likedPhotos")
-    }
+    userDefaultManager.set(value: likedPhotos, for: UserDefaultsKeys.likedPhotos.rawValue)
   }
   
   func loadLikedPhotosFromStorage() {
-    if let data = UserDefaults.standard.data(forKey: "likedPhotos"),
-       let decoded = try? JSONDecoder().decode([PhotoResponseModel].self, from: data) {
-      likedPhotos = Set(decoded)
+    if let data: Set<PhotoResponseModel> = userDefaultManager.load(for: UserDefaultsKeys.likedPhotos.rawValue) {
+      likedPhotos = data
     }
   }
 }

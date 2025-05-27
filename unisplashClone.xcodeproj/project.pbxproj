@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E33C51E12DE5D29700D44DAA /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = E33C51E02DE5D29700D44DAA /* Alamofire */; };
 		E34C89282DE4F53700D5581B /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E34C89272DE4F53700D5581B /* Launch Screen.storyboard */; };
-		E38C6DBD2DE0D9CD000B5D5A /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = E38C6DBC2DE0D9CD000B5D5A /* Alamofire */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,7 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E38C6DBD2DE0D9CD000B5D5A /* Alamofire in Frameworks */,
+				E33C51E12DE5D29700D44DAA /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -120,7 +120,7 @@
 			);
 			name = unisplashClone;
 			packageProductDependencies = (
-				E38C6DBC2DE0D9CD000B5D5A /* Alamofire */,
+				E33C51E02DE5D29700D44DAA /* Alamofire */,
 			);
 			productName = unisplashClone;
 			productReference = E38C6D8A2DE0C41D000B5D5A /* unisplashClone.app */;
@@ -205,7 +205,7 @@
 			mainGroup = E38C6D812DE0C41D000B5D5A;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				E38C6DBB2DE0D9CD000B5D5A /* XCRemoteSwiftPackageReference "Alamofire" */,
+				E33C51DF2DE5D29700D44DAA /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = E38C6D8B2DE0C41D000B5D5A /* Products */;
@@ -579,7 +579,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		E38C6DBB2DE0D9CD000B5D5A /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+		E33C51DF2DE5D29700D44DAA /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
 			requirement = {
@@ -590,9 +590,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		E38C6DBC2DE0D9CD000B5D5A /* Alamofire */ = {
+		E33C51E02DE5D29700D44DAA /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E38C6DBB2DE0D9CD000B5D5A /* XCRemoteSwiftPackageReference "Alamofire" */;
+			package = E33C51DF2DE5D29700D44DAA /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
 		};
 /* End XCSwiftPackageProductDependency section */
