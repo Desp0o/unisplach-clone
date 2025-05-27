@@ -111,6 +111,7 @@ struct SearchView: View {
       }
     }
     .customAlert(isError: $vm.isDownloadError, message: vm.message)
+    .customAlert(isError: $vm.isError, message: vm.message)
     .toast(isVisible: $vm.isSuccess, message: vm.message)
     .loading(isLoading: vm.isLoading)
     .loading(isLoading: vm.isDownlaodingPhotos)

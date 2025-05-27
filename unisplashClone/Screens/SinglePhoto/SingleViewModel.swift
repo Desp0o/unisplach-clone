@@ -13,8 +13,9 @@ import Foundation
 final class SingleViewModel {
   private let networkManager: NetworkManagerProtocol
   private let photoSaverManager: PhotoSaverManager
+  private let userDefaultManager: UserDefaultsManager
   var photoDetails: SinglePhotoDetailsModel? = nil
-  var likedPhotos: Set<PhotoResponseModel> = []
+  var likedPhotos: [PhotoResponseModel] = []
   var message: String = ""
   var isError: Bool = false
   var isSuccess: Bool = false
@@ -22,10 +23,12 @@ final class SingleViewModel {
   
   init(
     networkManager: NetworkManagerProtocol = NetworkManager(),
-    photoSaverManager: PhotoSaverManager = PhotoSaverManager()
+    photoSaverManager: PhotoSaverManager = PhotoSaverManager(),
+    userDefaultManager: UserDefaultsManager = UserDefaultsManager()
   ) {
     self.networkManager = networkManager
     self.photoSaverManager = photoSaverManager
+    self.userDefaultManager = userDefaultManager
     
     loadLikedPhotosFromStorage()
   }
@@ -57,6 +60,8 @@ final class SingleViewModel {
         let response: SinglePhotoDetailsModel = try await networkManager.networkCall(api: api)
         photoDetails = response
       } catch {
+        message = "Can't load photo details"
+        isError = true
         print(error)
       }
     }
@@ -64,25 +69,27 @@ final class SingleViewModel {
   
   
   func likePhoto(photo: PhotoResponseModel, isLiked: Bool) {
-    if isLiked {
-      likedPhotos.remove(photo)
-      saveLikedPhotoInStorage()
-    } else {
-      likedPhotos.insert(photo)
-      saveLikedPhotoInStorage()
-    }
+      if isLiked {
+          if let index = likedPhotos.firstIndex(where: { $0.id == photo.id }) {
+              likedPhotos.remove(at: index)
+              saveLikedPhotoInStorage()
+          }
+      } else {
+          if !likedPhotos.contains(where: { $0.id == photo.id }) {
+              likedPhotos.append(photo)
+              saveLikedPhotoInStorage()
+          }
+      }
   }
+
   
   func saveLikedPhotoInStorage() {
-    if let encoded = try? JSONEncoder().encode(likedPhotos) {
-      UserDefaults.standard.set(encoded, forKey: "likedPhotos")
-    }
+    userDefaultManager.set(value: likedPhotos, for: UserDefaultsKeys.likedPhotos.rawValue)
   }
   
   func loadLikedPhotosFromStorage() {
-    if let data = UserDefaults.standard.data(forKey: "likedPhotos"),
-       let decoded = try? JSONDecoder().decode([PhotoResponseModel].self, from: data) {
-      likedPhotos = Set(decoded)
+    if let data: [PhotoResponseModel] = userDefaultManager.load(for: UserDefaultsKeys.likedPhotos.rawValue) {
+      likedPhotos = data
     }
   }
 }

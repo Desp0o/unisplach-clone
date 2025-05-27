@@ -8,7 +8,11 @@
 import Photos
 import UIKit
 
-final class PhotoSaverManager {
+protocol PhotoSaverManagerProtocol {
+    func downloadAndSaveImages(urls: [String]) async throws
+}
+
+class PhotoSaverManager: PhotoSaverManagerProtocol {
   private let networkManager: ImageNetworkProtocol
   private let userDefaultManager: UserDefaultsManager
   
